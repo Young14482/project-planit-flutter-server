@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:planit/ui/pages/auth/change_password/change_password_page.dart';
+import 'package:planit/ui/pages/auth/find_id/find_id_page.dart';
+import 'package:planit/ui/pages/auth/find_password/find_password_page.dart';
+import 'package:planit/ui/pages/auth/login/login_page.dart';
+import 'package:planit/ui/pages/auth/signup/signup_page.dart';
 import 'package:planit/ui/pages/calendar/calendar_page.dart';
-import 'package:planit/ui/pages/change_password/change_password_page.dart';
-import 'package:planit/ui/pages/dialog/dialog_page.dart';
-import 'package:planit/ui/pages/find_id/find_id_page.dart';
-import 'package:planit/ui/pages/find_password/find_password_page.dart';
-import 'package:planit/ui/pages/login/login_page.dart';
-import 'package:planit/ui/pages/memo/memo_page.dart';
 import 'package:planit/ui/pages/profile/porfile_page.dart';
-import 'package:planit/ui/pages/signup/signup_page.dart';
-import 'package:planit/ui/pages/task/task_page.dart';
+import 'package:planit/ui/pages/temp/dialog_page.dart';
+import 'package:planit/ui/pages/todo/detail/todo_detail_page.dart';
+import 'package:planit/ui/pages/todo/memo/todo_memo_page.dart';
 
-import 'ui/pages/test/test_page.dart';
+import 'ui/pages/temp/test_page.dart';
 
 void main() async {
   // 한국어로 바꾸는 라이브러리 설정 >> 시작전에 바꾸고 가는 방식인듯
@@ -40,9 +40,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: TestPage(),
       routes: {
-        "/task": (context) => TaskPage(),
-        "/memo": (context) => MemoPage(),
-        "/dialog": (context) => DialogPage(),
+        "/task": (context) => TodoDetailPage(),
+        "/memo": (context) => TodoMemoPage(),
+        "/dialogs": (context) => DialogPage(),
         "/calendar": (context) => CalendarPage(),
         "/profile": (context) => ProfilePage(),
         "/signup": (context) => SignupPage(),

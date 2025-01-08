@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../_core/utils/utils.dart';
 
-class CalendarBodyList extends StatelessWidget {
-  const CalendarBodyList({
+class CalendarList extends StatelessWidget {
+  const CalendarList({
     super.key,
     required this.selectedEvents,
   });

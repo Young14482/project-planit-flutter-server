@@ -3,8 +3,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../_core/utils/utils.dart';
 
-class CalendarBodyCalendar extends StatelessWidget {
-  const CalendarBodyCalendar({
+class CalendarCalendar extends StatelessWidget {
+  const CalendarCalendar({
     super.key,
     required this.focusedDay,
     required this.selectedDay,

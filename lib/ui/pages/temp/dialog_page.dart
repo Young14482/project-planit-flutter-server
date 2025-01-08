@@ -95,7 +95,6 @@ class _DialogPageState extends State<DialogPage> {
   }
 
   void _showAlarmDialog(BuildContext context) {
-    bool _isSwitched = false;
     showDialog(
       context: context,
       builder: (BuildContext context) => AlarmDialog(),
@@ -119,11 +118,4 @@ class _DialogPageState extends State<DialogPage> {
       });
     }
   }
-}
-
-void showAlertDialogWithSwitch(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) => const AlarmDialog(),
-  );
 }

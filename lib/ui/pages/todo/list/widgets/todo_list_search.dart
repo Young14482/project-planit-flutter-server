@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_body_search_expansion.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_search_expansion.dart';
 
-
-class TodoListBodySearch extends StatefulWidget {
+class TodoListSearch extends StatefulWidget {
   @override
-  State<TodoListBodySearch> createState() => _TodoListBodySearchState();
+  State<TodoListSearch> createState() => _TodoListSearchState();
 }
 
-class _TodoListBodySearchState extends State<TodoListBodySearch> {
+class _TodoListSearchState extends State<TodoListSearch> {
   TextEditingController _searchController = TextEditingController();
 
   @override
@@ -33,9 +32,9 @@ class _TodoListBodySearchState extends State<TodoListBodySearch> {
 
           // 확장 패널
           // TODO 여기로 _searchController.text 넘겨서 패널 컨트롤해야함
-          TodoListBodySearchExpansion(),
-          TodoListBodySearchExpansion(),
-          TodoListBodySearchExpansion(),
+          TodoListSearchExpansion(),
+          TodoListSearchExpansion(),
+          TodoListSearchExpansion(),
           Center(
             child: Text(
               "완료된 모든 작업 확인",

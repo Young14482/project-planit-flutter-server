@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TodoListBodyCategoryCircle extends StatelessWidget {
-  TodoListBodyCategoryCircle(
+class TodoListCategoryCircle extends StatelessWidget {
+  TodoListCategoryCircle(
       {Key? key, required this.title, required this.position})
       : super(key: key);
 
@@ -23,8 +23,7 @@ class TodoListBodyCategoryCircle extends StatelessWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 12, color: Colors.white),
+          style: TextStyle(fontSize: 12, color: Colors.white),
         ),
       ),
     );

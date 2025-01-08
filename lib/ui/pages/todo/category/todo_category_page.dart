@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CategoryPage extends StatelessWidget {
-  const CategoryPage({super.key});
+class TodoCategoryPage extends StatelessWidget {
+  const TodoCategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

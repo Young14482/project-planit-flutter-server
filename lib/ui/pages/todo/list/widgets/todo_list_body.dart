@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_body_category_line.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_body_expansion.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_body_point_popup.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_category_line.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_expansion.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_point_popup.dart';
 
 class TodoListBody extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -14,17 +13,17 @@ class TodoListBody extends StatelessWidget {
           children: [
             // 수평 스크롤 카테고리
             Expanded(
-              child: TodoListBodyCategoryLine(),
+              child: TodoListCategoryLine(),
             ),
             // 점 3개 팝업 메뉴
-            TodoListBodyPointPopup(),
+            TodoListPointPopup(),
           ],
         ),
         // TODO 작업이 하나도 없을 때 보여주는 화면 PlanListBodyCheckbox
         // 확장 패널
-        TodoListBodyExpansion(),
-        TodoListBodyExpansion(),
-        TodoListBodyExpansion(),
+        TodoListExpansion(),
+        TodoListExpansion(),
+        TodoListExpansion(),
         Center(
           child: Text(
             "완료된 모든 작업 확인",

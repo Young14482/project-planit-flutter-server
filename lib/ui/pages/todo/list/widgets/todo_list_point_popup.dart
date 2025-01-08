@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 // This is the type used by the popup menu below.
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class TodoListBodyPointPopup extends StatefulWidget {
+class TodoListPointPopup extends StatefulWidget {
   @override
-  State<TodoListBodyPointPopup> createState() => _TodoListBodyPointPopupState();
+  State<TodoListPointPopup> createState() => _TodoListPointPopupState();
 }
 
-class _TodoListBodyPointPopupState extends State<TodoListBodyPointPopup> {
+class _TodoListPointPopupState extends State<TodoListPointPopup> {
   SampleItem? selectedItem;
 
   @override

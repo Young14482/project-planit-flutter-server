@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TodoListBodyCheckbox extends StatefulWidget {
-  const TodoListBodyCheckbox({super.key});
+class TodoListCheckbox extends StatefulWidget {
+  const TodoListCheckbox({super.key});
 
   @override
-  State<TodoListBodyCheckbox> createState() => _TodoListBodyCheckboxState();
+  State<TodoListCheckbox> createState() => _TodoListCheckboxState();
 }
 
-class _TodoListBodyCheckboxState extends State<TodoListBodyCheckbox> {
+class _TodoListCheckboxState extends State<TodoListCheckbox> {
   bool isChecked = false;
 
   @override

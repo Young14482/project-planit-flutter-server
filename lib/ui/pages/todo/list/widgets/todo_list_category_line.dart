@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'todo_list_body_category_circle.dart';
+import 'todo_list_category_circle.dart';
 
-class TodoListBodyCategoryLine extends StatelessWidget {
-  TodoListBodyCategoryLine({super.key});
+class TodoListCategoryLine extends StatelessWidget {
+  TodoListCategoryLine({super.key});
 
   final categories = [
     "카테고리1",
@@ -25,7 +25,7 @@ class TodoListBodyCategoryLine extends StatelessWidget {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           return Center(
-            child: TodoListBodyCategoryCircle(
+            child: TodoListCategoryCircle(
               title: categories[index],
               position: index,
             ),

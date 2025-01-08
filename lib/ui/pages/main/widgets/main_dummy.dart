@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MainBodyDummy extends StatelessWidget {
-  const MainBodyDummy({super.key});
+class MainDummy extends StatelessWidget {
+  const MainDummy({super.key});
 
   @override
   Widget build(BuildContext context) {

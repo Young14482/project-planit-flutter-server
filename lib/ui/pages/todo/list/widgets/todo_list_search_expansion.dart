@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_body_checkbox.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_search_checkbox.dart';
 
-class TodoListBodyExpansion extends StatefulWidget {
+class TodoListSearchExpansion extends StatefulWidget {
+  const TodoListSearchExpansion({super.key});
+
   @override
-  _TodoListBodyExpansionState createState() => _TodoListBodyExpansionState();
+  State<TodoListSearchExpansion> createState() =>
+      _TodoListSearchExpansionState();
 }
 
-class _TodoListBodyExpansionState extends State<TodoListBodyExpansion> {
+class _TodoListSearchExpansionState extends State<TodoListSearchExpansion> {
   bool _isExpanded = false; // 컬럼의 확장 상태를 관리하는 변수
 
   void _toggleExpand() {
@@ -45,7 +48,7 @@ class _TodoListBodyExpansionState extends State<TodoListBodyExpansion> {
                     // border 속성은 제거
                   ),
                   child: ListTile(
-                    leading: TodoListBodyCheckbox(),
+                    leading: TodoListSearchCheckbox(),
                     title: Text(
                       "영어 단어 10개 외우기",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -65,5 +68,6 @@ class _TodoListBodyExpansionState extends State<TodoListBodyExpansion> {
         ),
       ],
     );
+    ;
   }
 }

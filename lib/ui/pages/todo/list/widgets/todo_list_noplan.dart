@@ -1,8 +1,8 @@
 // 작업 없을 때 보여줄 화면
 import 'package:flutter/material.dart';
 
-class TodoListBodyNoplan extends StatelessWidget {
-  const TodoListBodyNoplan({
+class TodoListNoplan extends StatelessWidget {
+  const TodoListNoplan({
     super.key,
   });
 

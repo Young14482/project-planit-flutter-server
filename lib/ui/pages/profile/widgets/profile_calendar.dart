@@ -11,6 +11,13 @@ class _ProfileCalendar extends State<ProfileCalendar> {
   late DateTime _firstDay;
   late DateTime _lastDay;
 
+  // 강조할 날짜 리스트
+  final List<DateTime> highlightedDates = [
+    DateTime(2025, 1, 5),
+    DateTime(2025, 1, 10),
+    DateTime(2025, 1, 15),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -27,55 +34,84 @@ class _ProfileCalendar extends State<ProfileCalendar> {
       children: [
         // 캘린더
         Container(
-          height: 400,
-          padding: EdgeInsets.all(16.0),
+          height: 400, // 캘린더 높이
+          padding: EdgeInsets.all(16.0), // 내부 여백
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Colors.grey.shade100, // 배경
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: TableCalendar(
             firstDay: _firstDay,
             lastDay: _lastDay,
             focusedDay: _focusedDay,
+            locale: 'ko-KR',
             calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
+              outsideDaysVisible: false, // 전, 다음날 날짜 숨김
               selectedDecoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blue, // 선택된 날짜
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(8.0),
               ),
+              todayDecoration: BoxDecoration(), // 오늘 강조 제거
+            ),
+            headerStyle: HeaderStyle(
+              formatButtonVisible: false, // 해당 주 숨김
+              titleCentered: true, // 제목 중앙 정렬
+              leftChevronVisible: false, // 왼쪽 화살표 숨김
+              rightChevronVisible: false, // 오른쪽 화살표 숨김
             ),
             onDaySelected: (selectedDay, focusedDay) {
+              // 날짜 선택 시 focusedDay 업데이트
               setState(() {
                 _focusedDay = focusedDay;
               });
             },
             calendarBuilders: CalendarBuilders(
-              markerBuilder: (context, day, events) {
-                if (events.contains('highlighted')) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(8.0),
+              defaultBuilder: (context, day, focusedDay) {
+                // 강조할 날짜 체크
+                bool isHighlighted = highlightedDates.any(
+                  (highlightedDay) =>
+                      highlightedDay.year == day.year &&
+                      highlightedDay.month == day.month &&
+                      highlightedDay.day == day.day,
+                );
+                // 강조된 날짜 네모 박스
+                return Container(
+                  alignment: Alignment.center,
+                  decoration: isHighlighted
+                      ? BoxDecoration(
+                          color: Colors.blue.withOpacity(0.3),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(8.0),
+                        )
+                      : null, // 강조되지 않으면 기본 스타일
+                  child: Text(
+                    '${day.day}',
+                    style: TextStyle(
+                        // color: isHighlighted
+                        //     ? Colors.white
+                        //     : Colors.black, // 강조된 날짜 흰색
+                        ),
+                  ),
+                );
+              },
+              // 오늘 날짜 -기본 텍스트 스타일 적용
+              todayBuilder: (context, day, focusedDay) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '${day.day}',
+                    style: TextStyle(
+                      color: Colors.black,
                     ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      '${day.day}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  );
-                }
-                return null;
+                  ),
+                );
               },
             ),
           ),
         ),
-        SizedBox(height: 16), // 일정한 간격을 둠
-        // 그리드 - 퍼센트, 완료 개수
+        SizedBox(height: 16),
+        // 완료 퍼센트 및 완료 개수 표시
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

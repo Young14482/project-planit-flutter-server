@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class ChartData {
+class Chart {
   final String x;
   final double y;
 
-  ChartData(this.x, this.y);
+  Chart(this.x, this.y);
 }
 
-class ChartSection extends StatelessWidget {
-  final List<ChartData> chartData = [
-    ChartData('월', 3),
-    ChartData('화', 5),
-    ChartData('수', 8),
-    ChartData('목', 2),
-    ChartData('금', 7),
-    ChartData('토', 4),
-    ChartData('일', 6),
+class ProfileChart extends StatelessWidget {
+  final List<Chart> chart = [
+    Chart('월', 3),
+    Chart('화', 5),
+    Chart('수', 8),
+    Chart('목', 2),
+    Chart('금', 7),
+    Chart('토', 4),
+    Chart('일', 6),
   ];
 
   @override
@@ -34,12 +34,12 @@ class ChartSection extends StatelessWidget {
             ),
             title: ChartTitle(text: '일일 작업 완료'),
             series: <ChartSeries>[
-              ColumnSeries<ChartData, String>(
-                dataSource: chartData,
-                xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y,
+              ColumnSeries<Chart, String>(
+                dataSource: chart,
+                xValueMapper: (Chart data, _) => data.x,
+                yValueMapper: (Chart data, _) => data.y,
                 color: Colors.blue,
-                animationDuration: 0, // 애니메이션 제거
+                animationDuration: 0,
               ),
             ],
           ),

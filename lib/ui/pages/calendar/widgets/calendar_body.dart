@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../_core/utils/utils.dart';
-import '../widgets/calendar_body_calendar.dart';
-import 'calendar_body_list.dart';
+import '../widgets/calendar_calendar.dart';
+import 'calendar_list.dart';
 
 class CalendarBody extends StatelessWidget {
   final ValueNotifier<List<Event>> selectedEvents;
@@ -31,7 +31,7 @@ class CalendarBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CalendarBodyCalendar(
+        CalendarCalendar(
             focusedDay: focusedDay,
             selectedDay: selectedDay,
             getEventsForDay: getEventsForDay,
@@ -39,7 +39,7 @@ class CalendarBody extends StatelessWidget {
             onFormatChanged: onFormatChanged,
             onPageChanged: onPageChanged),
         const SizedBox(height: 8.0),
-        CalendarBodyList(selectedEvents: selectedEvents),
+        CalendarList(selectedEvents: selectedEvents),
       ],
     );
   }

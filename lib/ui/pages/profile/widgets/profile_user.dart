@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class UserSection extends StatelessWidget {
+class ProfileUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/profile/widgets/profile_body_calendar.dart';
-import 'package:planit/ui/pages/profile/widgets/profile_body_chart.dart';
-import 'package:planit/ui/pages/profile/widgets/profile_body_user.dart';
-
-import 'profile_body_work.dart';
+import 'package:planit/ui/pages/profile/widgets/profile_calendar.dart';
+import 'package:planit/ui/pages/profile/widgets/profile_chart.dart';
+import 'package:planit/ui/pages/profile/widgets/profile_user.dart';
+import 'package:planit/ui/pages/profile/widgets/profile_work.dart';
 
 class ProfileBody extends StatelessWidget {
   @override
@@ -12,13 +11,13 @@ class ProfileBody extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: ListView(
         children: [
-          UserSection(),
+          ProfileUser(),
           SizedBox(height: 16),
-          WorkSection(),
+          ProfileWork(),
           SizedBox(height: 16),
-          ChartSection(),
+          ProfileChart(),
           SizedBox(height: 16),
-          CalendarSection(),
+          ProfileCalendar(),
         ],
       ),
     );

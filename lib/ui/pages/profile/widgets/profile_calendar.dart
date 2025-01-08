@@ -3,10 +3,10 @@ import 'package:table_calendar/table_calendar.dart';
 
 class ProfileCalendar extends StatefulWidget {
   @override
-  _CalendarSectionState createState() => _CalendarSectionState();
+  _ProfileCalendar createState() => _ProfileCalendar();
 }
 
-class _CalendarSectionState extends State<CalendarSection> {
+class _ProfileCalendar extends State<ProfileCalendar> {
   late DateTime _focusedDay;
   late DateTime _firstDay;
   late DateTime _lastDay;
@@ -25,6 +25,7 @@ class _CalendarSectionState extends State<CalendarSection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // 캘린더
         Container(
           height: 400,
           padding: EdgeInsets.all(16.0),
@@ -73,11 +74,11 @@ class _CalendarSectionState extends State<CalendarSection> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 16), // 일정한 간격을 둠
+        // 그리드 - 퍼센트, 완료 개수
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // 완료 퍼센트
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -92,7 +93,6 @@ class _CalendarSectionState extends State<CalendarSection> {
                 ),
               ],
             ),
-            // 완료 개수
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

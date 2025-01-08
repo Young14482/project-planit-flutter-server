@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_body.dart';
 
 
 class TodoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TodoListPage(),
+      body: TodoListBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // + 버튼

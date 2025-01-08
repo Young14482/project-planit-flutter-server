@@ -49,6 +49,10 @@ class TestPage extends StatelessWidget {
           CustomButton("비밀번호 변경", () {
             Navigator.pushNamed(context, "/change-password");
           }),
+          SizedBox(height: 10),
+          CustomButton("메인페이지", () {
+            Navigator.pushNamed(context, "/mainpage");
+          }),
         ],
       ),
     );

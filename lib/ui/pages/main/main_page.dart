@@ -13,7 +13,7 @@ class _MainPageState extends State<MainPage> {
   // 상태
   int selectedIndex = 1;
   final GlobalKey<ScaffoldState> _forSideScaffoldKey =
-  GlobalKey<ScaffoldState>();
+      GlobalKey<ScaffoldState>();
 
   // 행위, onTap보다 여기에 적는 것을 추천
   void onClickBottomNavigation(int value) {

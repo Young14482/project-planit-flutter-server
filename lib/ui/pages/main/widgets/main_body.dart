@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/calendar/calendar_page.dart';
 import 'package:planit/ui/pages/main/widgets/main_body_dummy.dart';
-import 'package:planit/ui/pages/profile/porfile_page.dart';
 import 'package:planit/ui/pages/todo/list/todo_list_page.dart';
 
 class MainBody extends StatelessWidget {
@@ -19,11 +17,10 @@ class MainBody extends StatelessWidget {
         MainBodyDummy(),
         TodoListPage(),
         // 캘린더
-        CalendarPage(),
+        MainBodyDummy(),
         // 내 정보
-        ProfilePage(),
+        MainBodyDummy(),
       ],
     );
-    ;
   }
 }

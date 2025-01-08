@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
         const Locale('ko', 'KR'), // 한국어
       ],
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
-      // home: TestPage(),
+      // home: MainPage(),
+      home: TestPage(),
       routes: {
         "/task": (context) => TodoDetailPage(),
         "/memo": (context) => TodoMemoPage(),
@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
         "/find-id": (context) => FindIdPage(),
         "/find-password": (context) => FindPasswordPage(),
         "/change-password": (context) => ChangePasswordPage(),
+        "/mainpage": (context) => MainPage(),
       },
     );
   }

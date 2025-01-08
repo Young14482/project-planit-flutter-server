@@ -7,6 +7,7 @@ import 'package:planit/ui/pages/auth/find_password/find_password_page.dart';
 import 'package:planit/ui/pages/auth/login/login_page.dart';
 import 'package:planit/ui/pages/auth/signup/signup_page.dart';
 import 'package:planit/ui/pages/calendar/calendar_page.dart';
+import 'package:planit/ui/pages/main/main_page.dart';
 import 'package:planit/ui/pages/profile/porfile_page.dart';
 import 'package:planit/ui/pages/temp/dialog_page.dart';
 import 'package:planit/ui/pages/todo/detail/todo_detail_page.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         const Locale('ko', 'KR'), // 한국어
       ],
       debugShowCheckedModeBanner: false,
+      // home: MainPage(),
       home: TestPage(),
       routes: {
         "/task": (context) => TodoDetailPage(),
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
         "/find-id": (context) => FindIdPage(),
         "/find-password": (context) => FindPasswordPage(),
         "/change-password": (context) => ChangePasswordPage(),
+        "/mainpage": (context) => MainPage(),
       },
     );
   }

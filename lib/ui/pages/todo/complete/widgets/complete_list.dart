@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planit/ui/pages/todo/complete/widgets/complete_checkbox.dart';
 
+import '../../../../widgets/dialogs/custom_dialog.dart';
+
 class CompleteList extends StatefulWidget {
   @override
   _CompleteListState createState() => _CompleteListState();
@@ -14,6 +16,18 @@ class _CompleteListState extends State<CompleteList> {
     setState(() {
       _isExpanded = !_isExpanded; // 버튼 클릭 시 확장 상태를 토글
     });
+  }
+
+  void _showAlertDialog(
+      BuildContext context, String main, String sub, String confirm) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CustomDialog(
+        main: main,
+        sub: sub,
+        confirm: confirm,
+      ),
+    );
   }
 
   @override
@@ -34,7 +48,8 @@ class _CompleteListState extends State<CompleteList> {
             IconButton(
               icon: Icon(CupertinoIcons.delete),
               onPressed: () {
-                Navigator.pop(context);
+                _showAlertDialog(
+                    context, "완료된 작업을 삭제하시겠습니까?", "한번 삭제되면 복구할 수 없습니다.", "삭제");
               },
             ),
           ],

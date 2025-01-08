@@ -27,7 +27,7 @@ class _TodoListPointPopupState extends State<TodoListPointPopup> {
           value: SampleItem.itemOne,
           child: TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/category");
+                Navigator.popAndPushNamed(context, "/category");
               },
               child: Text("카테고리 관리")),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:planit/ui/widgets/dialogs/category_dialog.dart';
 
 class CustomDrawer extends StatefulWidget {
   @override
@@ -12,6 +13,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   // 범주 - 하위 카테고리
   List<String> _subCategory = ['카테고리 1', '카테고리 2', '카테고리 3'];
+
+  void _showInputCategoryDialog(BuildContext context) {
+    TextEditingController categoryController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CategoryDialog(
+        categoryController: categoryController,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +98,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 Icon(CupertinoIcons.plus),
                 SizedBox(width: 8.0),
-                Text("새로 만들기"),
+                InkWell(
+                    onTap: () {
+                      _showInputCategoryDialog(context);
+                    },
+                    child: Text("새로 만들기")),
               ],
             ),
           ),
@@ -97,7 +113,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 Icon(CupertinoIcons.gear),
                 SizedBox(width: 8.0),
-                Text("비밀번호 변경"),
+                InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/change-password");
+                    },
+                    child: Text("비밀번호 변경")),
               ],
             ),
           ),
@@ -108,7 +128,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 Icon(CupertinoIcons.square_arrow_left),
                 SizedBox(width: 8.0),
-                Text("로그아웃"),
+                InkWell(
+                    onTap: () {
+                      // gvm.logout();
+                    },
+                    child: Text("로그아웃")),
               ],
             ),
           ),

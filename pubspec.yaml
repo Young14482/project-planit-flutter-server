@@ -41,6 +41,7 @@ dependencies:
   flutter_secure_storage: ^9.2.3 # 어플리케이션 Secure Storage를 쉽게 사용할 수 있도록 도와주는 라이브러리
   validators: ^3.0.0 # 유효성 검사
   intl: ^0.19.0 # 포맷팅
+  flutter_riverpod: ^2.6.1
 
 
 dev_dependencies:

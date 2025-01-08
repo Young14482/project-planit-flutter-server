@@ -12,6 +12,10 @@ class _TodoListSearchState extends State<TodoListSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Temp AppBar"),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
           // TODO 검색 textform

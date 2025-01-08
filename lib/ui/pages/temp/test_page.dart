@@ -51,7 +51,7 @@ class TestPage extends StatelessWidget {
           }),
           SizedBox(height: 10),
           CustomButton("메인페이지", () {
-            Navigator.pushNamed(context, "/mainpage");
+            Navigator.popAndPushNamed(context, "/mainpage");
           }),
         ],
       ),

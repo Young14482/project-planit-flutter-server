@@ -25,11 +25,19 @@ class TodoListBody extends StatelessWidget {
         TodoListExpansion(),
         TodoListExpansion(),
         Center(
-          child: Text(
-            "완료된 모든 작업 확인",
-            style: TextStyle(
-              color: Colors.grey, // 글자색을 회색으로 설정
-              decoration: TextDecoration.underline, // 밑줄 추가
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, "/completed-plan");
+              },
+              child: Text(
+                "완료된 모든 작업 확인",
+                style: TextStyle(
+                  color: Colors.grey, // 글자색을 회색으로 설정
+                  decoration: TextDecoration.underline, // 밑줄 추가
+                ),
+              ),
             ),
           ),
         ),

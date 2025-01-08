@@ -60,15 +60,6 @@ class CalendarList extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      trailing: IconButton(
-                        icon: const Icon(
-                          Icons.flag,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          print('깃발 클릭: ${value[index]}');
-                        },
-                      ),
                     ),
                   ],
                 ),

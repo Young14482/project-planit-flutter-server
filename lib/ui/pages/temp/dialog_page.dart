@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_button.dart';
+import '../../widgets/dialogs/alarm_dialog.dart';
 import '../../widgets/dialogs/calendar_dialog.dart';
+import '../../widgets/dialogs/category_dialog.dart';
+import '../../widgets/dialogs/custom_dialog.dart';
 import '../../widgets/dialogs/repeat_todo_dialog.dart';
 import '../../widgets/dialogs/time_set_dialog.dart';
 
@@ -72,23 +75,10 @@ class _DialogPageState extends State<DialogPage> {
       BuildContext context, String main, String sub, String confirm) {
     showDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('$main'),
-        content: Text('$sub'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('취소'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('$confirm'),
-          ),
-        ],
+      builder: (BuildContext context) => CustomDialog(
+        main: main,
+        sub: sub,
+        confirm: confirm,
       ),
     );
   }
@@ -98,36 +88,16 @@ class _DialogPageState extends State<DialogPage> {
 
     showDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('새 카테고리 생성'),
-        content: TextField(
-          controller: categoryController,
-          decoration: InputDecoration(hintText: '여기에 입력하십시오.'),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('취소'),
-          ),
-          TextButton(
-            onPressed: () {
-              print('${categoryController.text}');
-              Navigator.pop(context);
-            },
-            child: Text('저장'),
-          ),
-        ],
+      builder: (BuildContext context) => CategoryDialog(
+        categoryController: categoryController,
       ),
     );
   }
 
   void _showAlarmDialog(BuildContext context) {
-    bool _isSwitched = false;
     showDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialogWithSwitch(),
+      builder: (BuildContext context) => AlarmDialog(),
     );
   }
 
@@ -147,78 +117,5 @@ class _DialogPageState extends State<DialogPage> {
         print(_selectedDate);
       });
     }
-  }
-}
-
-class AlertDialogWithSwitch extends StatefulWidget {
-  @override
-  _AlertDialogWithSwitchState createState() => _AlertDialogWithSwitchState();
-}
-
-List<String> list = ["마감 시간", "5분 전", "10분 전", "30분 전", "1시간 전", "1일 전"];
-
-class _AlertDialogWithSwitchState extends State<AlertDialogWithSwitch> {
-  bool _isSwitched = false; // 스위치 상태를 추적하는 변수
-  String dropdownValue = list.first;
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('알림 꺼짐'),
-          Switch(
-            value: _isSwitched, // 스위치 상태
-            onChanged: (bool newValue) {
-              setState(() {
-                _isSwitched = newValue; // 스위치 상태 변경 시 상태 업데이트
-              });
-            },
-          ),
-        ],
-      ),
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("에 알림"),
-          SizedBox(
-            width: 76,
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-                value: dropdownValue,
-                style: TextStyle(fontSize: 13),
-                items: list
-                    .map((String value) => DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        ))
-                    .toList(),
-                onChanged: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue = value!;
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('취소'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('완료'),
-        ),
-      ],
-    );
   }
 }

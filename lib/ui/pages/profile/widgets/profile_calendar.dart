@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarSection extends StatefulWidget {
+class ProfileCalendar extends StatefulWidget {
   @override
   _CalendarSectionState createState() => _CalendarSectionState();
 }

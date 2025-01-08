@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_button.dart';
-import '../../widgets/dialogs/alarm_dialog.dart';
 import '../../widgets/dialogs/calendar_dialog.dart';
 import '../../widgets/dialogs/category_dialog.dart';
 import '../../widgets/dialogs/custom_dialog.dart';
 import '../../widgets/dialogs/repeat_todo_dialog.dart';
-import '../../widgets/dialogs/time_set_dialog.dart';
 
 class DialogPage extends StatefulWidget {
   DialogPage({super.key});
@@ -22,10 +20,6 @@ class _DialogPageState extends State<DialogPage> {
       appBar: AppBar(),
       body: Column(
         children: [
-          SizedBox(height: 10),
-          CustomButton("알림", () {
-            _showAlarmDialog(context);
-          }),
           SizedBox(height: 10),
           CustomButton("카테고리", () {
             _showInputCategoryDialog(context);
@@ -50,15 +44,6 @@ class _DialogPageState extends State<DialogPage> {
               context: context,
               builder: (BuildContext context) {
                 return RepeatTodoDialog();
-              },
-            );
-          }),
-          SizedBox(height: 10),
-          CustomButton("시간", () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return TimeSetDialog();
               },
             );
           }),
@@ -91,13 +76,6 @@ class _DialogPageState extends State<DialogPage> {
       builder: (BuildContext context) => CategoryDialog(
         categoryController: categoryController,
       ),
-    );
-  }
-
-  void _showAlarmDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlarmDialog(),
     );
   }
 

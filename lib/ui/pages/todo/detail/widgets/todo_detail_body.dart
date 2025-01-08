@@ -74,34 +74,7 @@ class _TodoDetailBodyState extends State<TodoDetailBody> {
               ),
             ],
           ),
-          Divider(height: 10),
-          Row(
-            children: [
-              Container(
-                width: 40,
-                alignment: Alignment.centerLeft,
-                child: Icon(Icons.watch_later),
-              ),
-              Text("시간&알림"),
-              Spacer(),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("추가"),
-              ),
-            ],
-          ),
           SizedBox(height: 10),
-          Row(
-            children: [
-              SizedBox(width: 40),
-              Text("에 알림"),
-              Spacer(),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text("추가"),
-              ),
-            ],
-          ),
           Divider(height: 10),
           Row(
             children: [

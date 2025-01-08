@@ -53,12 +53,23 @@ class _ProfileCalendar extends State<ProfileCalendar> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
               todayDecoration: BoxDecoration(), // 오늘 강조 제거
+              // 날짜 간격을 띄우기 위해 날짜 영역의 padding 설정
+              rowDecoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.transparent,
+                ),
+              ),
             ),
             headerStyle: HeaderStyle(
-              formatButtonVisible: false, // 해당 주 숨김
-              titleCentered: true, // 제목 중앙 정렬
-              leftChevronVisible: false, // 왼쪽 화살표 숨김
-              rightChevronVisible: false, // 오른쪽 화살표 숨김
+              formatButtonVisible: false,
+              // 해당 주 숨김
+              titleCentered: true,
+              // 제목 중앙 정렬
+              leftChevronVisible: false,
+              // 화살표 숨김
+              rightChevronVisible: false,
+              headerPadding:
+                  EdgeInsets.symmetric(vertical: 10), // 요일과 날짜 사이에 간격 추가
             ),
             onDaySelected: (selectedDay, focusedDay) {
               // 날짜 선택 시 focusedDay 업데이트
@@ -78,27 +89,32 @@ class _ProfileCalendar extends State<ProfileCalendar> {
                 // 강조된 날짜 네모 박스
                 return Container(
                   alignment: Alignment.center,
-                  decoration: isHighlighted
-                      ? BoxDecoration(
-                          color: Colors.blue.withOpacity(0.3),
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(8.0),
-                        )
-                      : null, // 강조되지 않으면 기본 스타일
+                  margin: EdgeInsets.all(4), // 날짜 사이에 여백 추가
+                  decoration: BoxDecoration(
+                    color: isHighlighted
+                        ? Colors.blue // 강조된 날짜 파란색
+                        : Colors.grey.shade300, // 기본 회색
+                    borderRadius: BorderRadius.circular(12.0), // 살짝 둥근 모서리
+                  ),
                   child: Text(
                     '${day.day}',
                     style: TextStyle(
-                        // color: isHighlighted
-                        //     ? Colors.white
-                        //     : Colors.black, // 강조된 날짜 흰색
-                        ),
+                      color: isHighlighted
+                          ? Colors.white
+                          : Colors.black, // 강조된 날짜는 흰색
+                    ),
                   ),
                 );
               },
-              // 오늘 날짜 -기본 텍스트 스타일 적용
+              // 오늘 날짜 - 기본 텍스트 스타일 적용
               todayBuilder: (context, day, focusedDay) {
                 return Container(
                   alignment: Alignment.center,
+                  margin: EdgeInsets.all(4), // 날짜 사이에 여백 추가
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300, // 오늘 날짜는 회색 배경
+                    borderRadius: BorderRadius.circular(12.0), // 살짝 둥근 모서리
+                  ),
                   child: Text(
                     '${day.day}',
                     style: TextStyle(

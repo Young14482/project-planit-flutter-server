@@ -42,16 +42,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
             children: [
               // 로고
               Container(
-                width: 300,
-                height: 300,
+                width: 170,
+                height: 170,
                 decoration: BoxDecoration(
-                  color: Colors.blue[100],
                   image: DecorationImage(
-                    image: AssetImage('assets/logo.png'),
+                    image: AssetImage('assets/planit.png'),
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
+              SizedBox(height: 10),
+              Text(
+                'Planit',
+                style: TextStyle(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 30),
               // 범주
               GestureDetector(
                 onTap: () {

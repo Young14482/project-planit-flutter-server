@@ -7,11 +7,13 @@ class TodoListCategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: const Text('작업 정렬'),
-      onPressed: () => showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => SortTodoDialog(),
-      ),
+      child: Text('작업 정렬'),
+      onPressed: () {
+        Navigator.pop(context);
+        showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => SortTodoDialog());
+      },
     );
   }
 }

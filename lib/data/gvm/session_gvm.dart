@@ -45,11 +45,13 @@ class SessionGVM extends Notifier<SessionUser> {
     // Navigator.pushNamed(mContext, "/login");
   }
 
-  Future<void> logout() async {}
+  Future<void> logout() async {
+    Navigator.popAndPushNamed(mContext, "/login");
+  }
 
   Future<void> autoLogin() async {
     Future.delayed(
-      Duration(seconds: 3),
+      Duration(seconds: 1),
       () {
         Navigator.popAndPushNamed(mContext, "/login");
       },

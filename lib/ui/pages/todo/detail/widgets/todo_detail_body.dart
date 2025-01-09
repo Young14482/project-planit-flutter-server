@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:planit/ui/widgets/dialogs/calendar_dialog.dart';
+import 'package:planit/ui/widgets/dialogs/repeat_todo_dialog.dart';
 
 List<String> list = ['카테고리 없음', "카테고리1", "카테고리2", "카테고리3", "카테고리4", "카테고리5"];
 
@@ -69,7 +71,11 @@ class _TodoDetailBodyState extends State<TodoDetailBody> {
               Text("마감일"),
               Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => CalendarDialog());
+                },
                 child: Text("추가"),
               ),
             ],
@@ -86,7 +92,11 @@ class _TodoDetailBodyState extends State<TodoDetailBody> {
               Text("반복"),
               Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => RepeatTodoDialog());
+                },
                 child: Text("아니요"),
               ),
             ],
@@ -102,7 +112,9 @@ class _TodoDetailBodyState extends State<TodoDetailBody> {
               Text("메모"),
               Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/memo");
+                },
                 child: Text("추가"),
               ),
             ],

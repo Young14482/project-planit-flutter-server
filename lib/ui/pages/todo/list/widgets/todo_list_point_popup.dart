@@ -31,14 +31,6 @@ class _TodoListPointPopupState extends State<TodoListPointPopup> {
               },
               child: Text("카테고리 관리")),
         ),
-        // PopupMenuItem<SampleItem>(
-        //   value: SampleItem.itemTwo,
-        //   child: TextButton(
-        //       onPressed: () {
-        //         Navigator.pushNamed(context, "/search");
-        //       },
-        //       child: Text("검색")),
-        // ),
         PopupMenuItem<SampleItem>(
           value: SampleItem.itemThree,
           child: TodoListCategoryButton(),

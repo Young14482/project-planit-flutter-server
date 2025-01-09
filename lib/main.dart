@@ -48,19 +48,21 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
+      // home: TestPage(),
       routes: {
         // TODO 테스트 라우트 삭제 필요
         "/test": (context) => TestPage(),
-
-        "/task": (context) => TodoDetailPage(),
-        "/memo": (context) => TodoMemoPage(),
         "/dialogs": (context) => DialogPage(),
+
+        "/todo-detail": (context) => TodoDetailPage(),
+        "/memo": (context) => TodoMemoPage(),
         "/calendar": (context) => CalendarPage(),
         "/profile": (context) => ProfilePage(),
         "/signup": (context) => SignupPage(),
         "/login": (context) => LoginPage(),
         "/find-id": (context) => FindIdPage(),
         "/find-password": (context) => FindPasswordPage(),
+        "/join": (context) => SignupPage(),
         "/change-password": (context) => ChangePasswordPage(),
         "/mainpage": (context) => MainPage(),
         "/category": (context) => TodoCategoryPage(),

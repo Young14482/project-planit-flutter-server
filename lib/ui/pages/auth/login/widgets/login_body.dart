@@ -74,14 +74,14 @@ class LoginBody extends ConsumerWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/findId");
+                      Navigator.pushNamed(context, "/find-id");
                     },
                     child: Text("아이디 찾기"),
                   ),
                   Text("|"),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/findPassword");
+                      Navigator.pushNamed(context, "/find-password");
                     },
                     child: Text("비밀번호 찾기"),
                   ),

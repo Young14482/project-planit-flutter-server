@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginBody extends StatelessWidget {
+import '../../../../../data/gvm/session_gvm.dart';
+
+class LoginBody extends ConsumerWidget {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionGVM gvm = ref.read(sessionProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -50,7 +55,10 @@ class LoginBody extends StatelessWidget {
               SizedBox(height: 20),
               // 로그인 버튼
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // TODO 로그인 메서드 미완성
+                  gvm.login();
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(

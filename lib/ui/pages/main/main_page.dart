@@ -29,14 +29,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _forSideScaffoldKey,
-      drawer: CustomDrawer(),
       // 왼쪽에서 나오는 드로어 설정
-      // 임시 앱바
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-        title: Text("Temp AppBar"),
-        centerTitle: true,
-      ),
+      drawer: CustomDrawer(),
       body: MainBody(selectedIndex: selectedIndex),
       bottomNavigationBar: CustomBottonNavigationbar(
           selectedIndex: selectedIndex,

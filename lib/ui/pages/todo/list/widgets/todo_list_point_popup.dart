@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'todo_list_category_button.dart';
+
 // This is the type used by the popup menu below.
 enum SampleItem { itemOne, itemTwo, itemThree }
 
@@ -21,17 +23,25 @@ class _TodoListPointPopupState extends State<TodoListPointPopup> {
         });
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
-        const PopupMenuItem<SampleItem>(
+        PopupMenuItem<SampleItem>(
           value: SampleItem.itemOne,
-          child: Text('카테고리 관리'),
+          child: TextButton(
+              onPressed: () {
+                Navigator.popAndPushNamed(context, "/category");
+              },
+              child: Text("카테고리 관리")),
         ),
-        const PopupMenuItem<SampleItem>(
-          value: SampleItem.itemTwo,
-          child: Text('검색'),
-        ),
-        const PopupMenuItem<SampleItem>(
+        // PopupMenuItem<SampleItem>(
+        //   value: SampleItem.itemTwo,
+        //   child: TextButton(
+        //       onPressed: () {
+        //         Navigator.pushNamed(context, "/search");
+        //       },
+        //       child: Text("검색")),
+        // ),
+        PopupMenuItem<SampleItem>(
           value: SampleItem.itemThree,
-          child: Text('작업 정렬'),
+          child: TodoListCategoryButton(),
         ),
       ],
     );

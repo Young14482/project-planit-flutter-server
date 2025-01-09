@@ -7,7 +7,7 @@ class TodoListExpansion extends StatefulWidget {
 }
 
 class _TodoListExpansionState extends State<TodoListExpansion> {
-  bool _isExpanded = false; // 컬럼의 확장 상태를 관리하는 변수
+  bool _isExpanded = true; // 컬럼의 확장 상태를 관리하는 변수
 
   void _toggleExpand() {
     setState(() {
@@ -56,7 +56,6 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
                         Icon(Icons.alarm),
                       ],
                     ),
-                    trailing: Icon(Icons.flag_outlined),
                   ),
                 ),
               ),

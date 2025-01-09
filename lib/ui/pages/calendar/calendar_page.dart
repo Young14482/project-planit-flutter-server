@@ -87,13 +87,7 @@ class _CalendarPage extends State<CalendarPage> {
           _focusedDay = focusedDay;
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // + 버튼
-        },
-        child: const Icon(Icons.add),
-        backgroundColor: Colors.blue,
-      ),
+
     );
   }
 }

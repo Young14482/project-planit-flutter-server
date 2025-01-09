@@ -10,13 +10,22 @@ class TodoCategoryPage extends StatelessWidget {
       body: Column(
         children: [
           // 카테고리 관리 화면
-          Row(
+          Stack(
             children: [
-              Expanded(
-                child: Container(
-                  height: 50,
-                  child: Center(child: Text("홈페이지에 표시되는 카테고리")),
-                  color: Colors.blue.shade200,
+              Container(
+                height: 50,
+                width: double.infinity,
+                color: Colors.blue.shade200,
+                child: Center(child: Text("홈페이지에 표시되는 카테고리")),
+              ),
+              Positioned(
+                left: 0,
+                top: 0,
+                child: IconButton(
+                  icon: Icon(CupertinoIcons.arrow_left),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ),
             ],
@@ -75,3 +84,4 @@ class TodoCategoryPage extends StatelessWidget {
     );
   }
 }
+

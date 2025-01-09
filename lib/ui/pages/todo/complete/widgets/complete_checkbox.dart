@@ -36,10 +36,9 @@ class _CompleteCheckboxState extends State<CompleteCheckbox> {
       ),
       onPressed: () {
         setState(() {
-          isChecked = !isChecked;
+          // isChecked = !isChecked;
         });
       },
     );
-    ;
   }
 }

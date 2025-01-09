@@ -10,6 +10,7 @@ import 'package:planit/ui/pages/auth/signup/signup_page.dart';
 import 'package:planit/ui/pages/calendar/calendar_page.dart';
 import 'package:planit/ui/pages/main/main_page.dart';
 import 'package:planit/ui/pages/profile/porfile_page.dart';
+import 'package:planit/ui/pages/splash/splash_page.dart';
 import 'package:planit/ui/pages/temp/dialog_page.dart';
 import 'package:planit/ui/pages/todo/category/todo_category_page.dart';
 import 'package:planit/ui/pages/todo/complete/complete_page.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       // 한국어로 바꾸기 추가설정
       locale: Locale('ko', 'KR'),
       localizationsDelegates: [
@@ -45,8 +47,7 @@ class MyApp extends StatelessWidget {
         const Locale('ko', 'KR'), // 한국어
       ],
       debugShowCheckedModeBanner: false,
-      // home: SplashPage(),
-      home: TestPage(),
+      home: SplashPage(),
       routes: {
         // TODO 테스트 라우트 삭제 필요
         "/test": (context) => TestPage(),
@@ -64,7 +65,6 @@ class MyApp extends StatelessWidget {
         "/mainpage": (context) => MainPage(),
         "/category": (context) => TodoCategoryPage(),
         "/completed-plan": (context) => CompletePage(),
-
       },
     );
   }

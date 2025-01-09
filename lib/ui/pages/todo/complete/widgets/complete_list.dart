@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:planit/ui/pages/todo/complete/widgets/complete_checkbox.dart';
-
-import '../../../../widgets/dialogs/custom_dialog.dart';
+import 'package:planit/ui/pages/todo/complete/widgets/complete_remove_all_dialog.dart';
 
 class CompleteList extends StatefulWidget {
   @override
@@ -22,7 +21,7 @@ class _CompleteListState extends State<CompleteList> {
       BuildContext context, String main, String sub, String confirm) {
     showDialog(
       context: context,
-      builder: (BuildContext context) => CustomDialog(
+      builder: (BuildContext context) => CompleteRemoveAllDialog(
         main: main,
         sub: sub,
         confirm: confirm,

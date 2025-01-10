@@ -60,7 +60,6 @@ class SessionGVM extends Notifier<SessionUser> {
     dio.options.headers["Authorization"] = accessToken;
 
     // Logger().d(accessToken);
-    // 트랜잭션 끝
     Navigator.popAndPushNamed(mContext, "/mainpage");
   }
 

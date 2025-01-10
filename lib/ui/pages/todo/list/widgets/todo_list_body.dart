@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:planit/ui/pages/todo/list/todo_list_vm.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_category_line.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_expansion.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_point_popup.dart';
 
-class TodoListBody extends StatelessWidget {
+class TodoListBody extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    TodoListModel? model = ref.watch(TodoListProvider);
+    // Logger().d(model);
+
     return ListView(
       children: [
         // TODO 검색 버튼 누를 경우 카테고리 라인 제거하고 검색 textform
@@ -19,11 +24,17 @@ class TodoListBody extends StatelessWidget {
             TodoListPointPopup(),
           ],
         ),
-        // TODO 작업이 하나도 없을 때 보여주는 화면 PlanListBodyCheckbox
+        // TODO 작업이 하나도 없을 때 보여주는 화면 적용 안됨
         // 확장 패널
-        TodoListExpansion(),
-        TodoListExpansion(),
-        TodoListExpansion(),
+        TodoListExpansion(
+          title: "이전의",
+        ),
+        TodoListExpansion(
+          title: "오늘",
+        ),
+        TodoListExpansion(
+          title: "미래",
+        ),
         Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

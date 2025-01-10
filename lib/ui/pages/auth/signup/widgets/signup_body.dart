@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:planit/data/gvm/session_gvm.dart';
 
-class SignupBody extends StatelessWidget {
+class SignupBody extends ConsumerWidget {
   final TextEditingController _username = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionGVM gvm = ref.read(sessionProvider.notifier);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -16,28 +20,6 @@ class SignupBody extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 300,
-                height: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/planit.png', // 로고 경로
-                      width: 170,
-                      height: 170,
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Planit',
-                      style: TextStyle(
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 20),
               Text(
                 '회원가입',
@@ -47,7 +29,6 @@ class SignupBody extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40),
-              // 아이디 입력 및 중복확인 버튼
               Row(
                 children: [
                   Expanded(
@@ -64,7 +45,9 @@ class SignupBody extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      gvm.checkDuplicateId(_username.text.trim());
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(90, 50),
                       shape: RoundedRectangleBorder(
@@ -76,7 +59,6 @@ class SignupBody extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 15),
-              // 이메일 입력
               TextFormField(
                 controller: _email,
                 decoration: InputDecoration(
@@ -88,7 +70,6 @@ class SignupBody extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              // 비밀번호 입력
               TextFormField(
                 controller: _password,
                 obscureText: true,
@@ -101,7 +82,6 @@ class SignupBody extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              // 비밀번호 확인
               TextFormField(
                 controller: _confirmPassword,
                 obscureText: true,
@@ -114,20 +94,24 @@ class SignupBody extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              // 회원가입 버튼
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "/login_page");
+                  final username = _username.text.trim();
+                  final email = _email.text.trim();
+                  final password = _password.text.trim();
+                  final confirmPassword = _confirmPassword.text.trim();
+
+                  // 프론트에서 유효성 검사
+                  gvm.ckoutUser(username, email, password, confirmPassword);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
-                    // 둥근 버튼
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
                 child: Text("회원가입"),
-              ),
+              )
             ],
           ),
         ],

@@ -70,8 +70,7 @@ class LoginBody extends ConsumerWidget {
               // 로그인 버튼
               ElevatedButton(
                 onPressed: () {
-                  // TODO 로그인 메서드 미완성
-                  gvm.login("ssar", "1234");
+                  gvm.login(_username.text.trim(), _password.text.trim());
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),

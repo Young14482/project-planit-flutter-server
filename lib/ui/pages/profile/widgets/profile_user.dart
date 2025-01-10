@@ -4,12 +4,16 @@ class ProfileUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.blue.shade200,
+      ),
       padding: EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "user1234 | user1234@example.com",
+            "user1234",
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

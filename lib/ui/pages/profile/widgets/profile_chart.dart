@@ -29,7 +29,7 @@ class ProfileChart extends StatelessWidget {
             primaryXAxis: CategoryAxis(),
             primaryYAxis: NumericAxis(
               minimum: 0,
-              maximum: 8,
+              maximum: 8, // 최대값 걸기
               interval: 2,
             ),
             title: ChartTitle(text: '일일 작업 완료'),

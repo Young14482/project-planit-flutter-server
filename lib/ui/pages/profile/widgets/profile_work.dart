@@ -25,7 +25,7 @@ class ProfileWork extends StatelessWidget {
                   height: 100,
                   margin: EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
-                    color: Color(0xfff9ffff),
+                    color: Colors.blue.shade200,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -53,7 +53,7 @@ class ProfileWork extends StatelessWidget {
                   height: 100,
                   margin: EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
-                    color: Color(0xfff9ffff),
+                    color: Colors.blue.shade200,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(

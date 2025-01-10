@@ -41,6 +41,14 @@ class LoginBody extends ConsumerWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
+              Text(
+                '로그인',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               SizedBox(height: 40),
               // 아이디 입력
               TextFormField(

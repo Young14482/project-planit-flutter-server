@@ -5,7 +5,7 @@ import 'category.dart';
 class Todo {
   int id;
   String title;
-  Category category;
+  Category? category;
   String memo;
   DateTime dueDate;
   DateTime createdAt;
@@ -20,7 +20,8 @@ class Todo {
   Todo.fromMap(Map<String, dynamic> map)
       : this.id = map["id"],
         this.title = map["title"],
-        this.category = Category.fromMap(map["category"]),
+        this.category =
+            map["category"] != null ? Category.fromMap(map["category"]) : null,
         this.memo = map["memo"],
         this.dueDate = DateFormat("yyyy-MM-dd").parse(map["dueDate"]),
         this.createdAt =

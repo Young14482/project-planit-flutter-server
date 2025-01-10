@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 
 import '../../_core/utils/api_dio.dart';
 
@@ -20,7 +19,6 @@ class UserRepository {
     try {
       accessToken = response
           .headers["Authorization"]![0]; // ; 로 구분되어 있어서 제일 앞에 값([0]번지)이 필요
-      Logger().d(accessToken);
     } catch (e) {}
 
     // body와 토큰 동시에 보내기 위해 구조 분해 할당 사용

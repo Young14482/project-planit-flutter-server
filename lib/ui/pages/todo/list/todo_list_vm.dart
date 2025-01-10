@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:planit/data/model/todo.dart';
 import 'package:planit/main.dart';
 
@@ -80,7 +79,7 @@ class TodoListVM extends Notifier<TodoListModel?> {
       );
       return;
     }
-    Logger().d(responseBody["response"]);
+    // Logger().d(responseBody["response"]);
     state = TodoListModel.fromMap(responseBody["response"]);
   }
 }

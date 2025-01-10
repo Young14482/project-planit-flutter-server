@@ -2,29 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ProfileCalendar extends StatefulWidget {
+  final List<DateTime> highlightedDates;
+
+  ProfileCalendar(this.highlightedDates);
+
   @override
   _ProfileCalendar createState() => _ProfileCalendar();
 }
 
 class _ProfileCalendar extends State<ProfileCalendar> {
-  late DateTime _focusedDay;
-  late DateTime _firstDay;
-  late DateTime _lastDay;
-
-  // 강조할 날짜 리스트
-  final List<DateTime> highlightedDates = [
-    DateTime(2025, 1, 5),
-    DateTime(2025, 1, 10),
-    DateTime(2025, 1, 15),
-  ];
+  late DateTime _focusedDay; // 현재 포커스된 날짜
+  late DateTime _firstDay; // 캘린더 시작 날짜
+  late DateTime _lastDay; // 캘린더 종료 날짜
 
   @override
   void initState() {
     super.initState();
-
-    _focusedDay = DateTime.now();
-    _firstDay = DateTime(_focusedDay.year, _focusedDay.month, 1);
-    _lastDay = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
+    _focusedDay = DateTime.now(); // 현재 날짜로 초기화
+    _firstDay = DateTime(_focusedDay.year, _focusedDay.month, 1); // 해당 월의 첫째 날
+    _lastDay =
+        DateTime(_focusedDay.year, _focusedDay.month + 1, 0); // 해당 월의 마지막 날
   }
 
   @override
@@ -32,12 +29,12 @@ class _ProfileCalendar extends State<ProfileCalendar> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 캘린더
+        // 캘린더 위젯
         Container(
-          height: 400, // 캘린더 높이
-          padding: EdgeInsets.all(16.0), // 내부 여백
+          height: 400,
+          padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100, // 배경
+            color: Colors.grey.shade100, // 배경색
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: TableCalendar(
@@ -45,80 +42,76 @@ class _ProfileCalendar extends State<ProfileCalendar> {
             lastDay: _lastDay,
             focusedDay: _focusedDay,
             locale: 'ko-KR',
+            // 한국어 설정
             calendarStyle: CalendarStyle(
-              outsideDaysVisible: false, // 전, 다음날 날짜 숨김
+              outsideDaysVisible: false, // 이전/다음 달 날짜 숨김
               selectedDecoration: BoxDecoration(
-                color: Colors.blue, // 선택된 날짜
+                color: Colors.blue,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               todayDecoration: BoxDecoration(), // 오늘 강조 제거
-              // 날짜 간격을 띄우기 위해 날짜 영역의 padding 설정
-              rowDecoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.transparent,
-                ),
-              ),
             ),
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
-              // 해당 주 숨김
+              // 형식 버튼 숨김
               titleCentered: true,
               // 제목 중앙 정렬
               leftChevronVisible: false,
-              // 화살표 숨김
+              // 좌측 화살표 숨김
               rightChevronVisible: false,
+              // 우측 화살표 숨김
               headerPadding:
-                  EdgeInsets.symmetric(vertical: 10), // 요일과 날짜 사이에 간격 추가
+                  EdgeInsets.symmetric(vertical: 10), // 헤더와 캘린더 간격 추가
             ),
             onDaySelected: (selectedDay, focusedDay) {
-              // 날짜 선택 시 focusedDay 업데이트
+              // 날짜 선택 시 포커스 날짜 업데이트
               setState(() {
                 _focusedDay = focusedDay;
               });
             },
             calendarBuilders: CalendarBuilders(
               defaultBuilder: (context, day, focusedDay) {
-                // 강조할 날짜 체크
-                bool isHighlighted = highlightedDates.any(
-                  (highlightedDay) =>
-                      highlightedDay.year == day.year &&
-                      highlightedDay.month == day.month &&
-                      highlightedDay.day == day.day,
-                );
-                // 강조된 날짜 네모 박스
+                // 강조할 날짜 여부 확인
+                bool isHighlighted = widget.highlightedDates.any(
+                    (highlightedDay) =>
+                        highlightedDay.year == day.year &&
+                        highlightedDay.month == day.month &&
+                        highlightedDay.day == day.day);
+
+                // 기본 날짜 스타일
                 return Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.all(4), // 날짜 사이에 여백 추가
+                  margin: EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     color: isHighlighted
-                        ? Colors.blue // 강조된 날짜 파란색
-                        : Colors.grey.shade300, // 기본 회색
-                    borderRadius: BorderRadius.circular(12.0), // 살짝 둥근 모서리
+                        ? Colors.blue // 강조된 날짜 배경색
+                        : Colors.grey.shade300, // 기본 날짜 배경색
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Text(
                     '${day.day}',
                     style: TextStyle(
                       color: isHighlighted
                           ? Colors.white
-                          : Colors.black, // 강조된 날짜는 흰색
+                          : Colors.black, // 강조된 날짜 텍스트 색상
                     ),
                   ),
                 );
               },
-              // 오늘 날짜 - 기본 텍스트 스타일 적용
               todayBuilder: (context, day, focusedDay) {
+                // 오늘 날짜 스타일
                 return Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.all(4), // 날짜 사이에 여백 추가
+                  margin: EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300, // 오늘 날짜는 회색 배경
-                    borderRadius: BorderRadius.circular(12.0), // 살짝 둥근 모서리
+                    color: Colors.grey.shade300, // 오늘 날짜 배경색
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Text(
                     '${day.day}',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.black, // 오늘 날짜 텍스트 색상
                     ),
                   ),
                 );
@@ -134,9 +127,9 @@ class _ProfileCalendar extends State<ProfileCalendar> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.access_time, color: Colors.blue, size: 30),
+                Icon(Icons.access_time, color: Colors.blue, size: 30), // 시간 아이콘
                 Text(
-                  "88%",
+                  "88%", // 완료 퍼센트
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -149,8 +142,9 @@ class _ProfileCalendar extends State<ProfileCalendar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.check_circle, color: Colors.blue, size: 30),
+                // 완료 아이콘
                 Text(
-                  "22",
+                  "22", // 완료 개수
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

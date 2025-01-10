@@ -20,8 +20,8 @@ class Todo {
   Todo.fromMap(Map<String, dynamic> map)
       : this.id = map["id"],
         this.title = map["title"],
-        this.category =
-            map["category"] != null ? Category.fromMap(map["category"]) : null,
+        this.categories =
+            map["category"] == null ? null : Category.fromMap(map["category"]),
         this.memo = map["memo"],
         this.dueDate = DateFormat("yyyy-MM-dd").parse(map["dueDate"]),
         this.createdAt =

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfileWork extends StatelessWidget {
+  int complete;
+  int notComplete;
+
+  ProfileWork(this.complete, this.notComplete);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +37,7 @@ class ProfileWork extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "1",
+                        "${complete}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -60,7 +65,7 @@ class ProfileWork extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "1",
+                        "${notComplete}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

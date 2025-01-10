@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../data/gvm/session_gvm.dart';
 
 class LoginBody extends ConsumerWidget {
-  final TextEditingController _username = TextEditingController();
-  final TextEditingController _password = TextEditingController();
+  // TODO 나중에 지우기
+  final TextEditingController _username = TextEditingController(text: "ssar");
+  final TextEditingController _password = TextEditingController(text: "1234");
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

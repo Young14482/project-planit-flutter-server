@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfileWork extends StatelessWidget {
+  int complete;
+  int notComplete;
+
+  ProfileWork(this.complete, this.notComplete);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,14 +30,14 @@ class ProfileWork extends StatelessWidget {
                   height: 100,
                   margin: EdgeInsets.only(right: 8),
                   decoration: BoxDecoration(
-                    color: Color(0xfff9ffff),
+                    color: Colors.blue.shade200,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "1",
+                        "${complete}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -53,14 +58,14 @@ class ProfileWork extends StatelessWidget {
                   height: 100,
                   margin: EdgeInsets.only(left: 8),
                   decoration: BoxDecoration(
-                    color: Color(0xfff9ffff),
+                    color: Colors.blue.shade200,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "1",
+                        "${notComplete}",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

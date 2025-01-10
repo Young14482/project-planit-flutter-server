@@ -24,4 +24,15 @@ class UserRepository {
     // body와 토큰 동시에 보내기 위해 구조 분해 할당 사용
     return (body, accessToken);
   }
+
+  Future<Map<String, dynamic>> save(Map<String, dynamic> data) async {
+    Response response = await dio.post("/signup", data: data);
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> checkUsername(Map<String, dynamic> data) async {
+    Response response = await dio.post('/check-id', data: data);
+    Map<String, dynamic> body = response.data;
+    return body;
+  }
 }

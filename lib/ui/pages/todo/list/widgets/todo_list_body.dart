@@ -26,15 +26,21 @@ class TodoListBody extends ConsumerWidget {
         ),
         // TODO 작업이 하나도 없을 때 보여주는 화면 적용 안됨
         // 확장 패널
-        TodoListExpansion(
-          title: "이전의",
-        ),
-        TodoListExpansion(
-          title: "오늘",
-        ),
-        TodoListExpansion(
-          title: "미래",
-        ),
+        if (model?.todosPrev != null)
+          TodoListExpansion(
+            title: "이전의",
+            list: model?.todosPrev,
+          ),
+        if (model?.todosToday != null)
+          TodoListExpansion(
+            title: "오늘",
+            list: model?.todosToday,
+          ),
+        if (model?.todosFuture != null)
+          TodoListExpansion(
+            title: "미래",
+            list: model?.todosFuture,
+          ),
         Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),

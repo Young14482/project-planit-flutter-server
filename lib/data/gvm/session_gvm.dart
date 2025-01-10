@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../../_core/utils/api_dio.dart';
 import '../../main.dart';
@@ -58,6 +59,7 @@ class SessionGVM extends Notifier<SessionUser> {
     // 3. Dio 토큰 세팅, dio는 메모리에 저장이라 await 필요 없음 -> 껐다 키면 없어지는 데이터
     dio.options.headers["Authorization"] = accessToken;
 
+    // Logger().d(accessToken);
     // 트랜잭션 끝
     Navigator.popAndPushNamed(mContext, "/mainpage");
   }

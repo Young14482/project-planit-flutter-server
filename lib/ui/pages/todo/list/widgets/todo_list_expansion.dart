@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:planit/data/model/todo.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_checkbox.dart';
 
 class TodoListExpansion extends StatefulWidget {
   final String title;
+  final List<Todo>? list;
 
-  TodoListExpansion({required this.title});
+  TodoListExpansion({required this.title, this.list});
 
   @override
   _TodoListExpansionState createState() => _TodoListExpansionState();
@@ -21,12 +24,12 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
 
   @override
   Widget build(BuildContext context) {
-    // 샘플 데이터
-    List<Map<String, String>> tasks = [
-      {"title": "영어 단어 10개 외우기", "date": "01-05"},
-      {"title": "프로그래밍 과제 하기", "date": "01-06"},
-      {"title": "독서 30분 하기", "date": "01-07"},
-    ];
+    // // 샘플 데이터
+    // List<Map<String, String>> tasks = [
+    //   {"title": "영어 단어 10개 외우기", "date": "01-05"},
+    //   {"title": "프로그래밍 과제 하기", "date": "01-06"},
+    //   {"title": "독서 30분 하기", "date": "01-07"},
+    // ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +51,7 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
           child: ListView.builder(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: tasks.length,
+            itemCount: widget.list?.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -60,12 +63,13 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
                   child: ListTile(
                     leading: TodoListCheckbox(),
                     title: Text(
-                      tasks[index]["title"]!,
+                      widget.list![index].title,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Row(
                       children: [
-                        Text(tasks[index]["date"]!),
+                        Text(DateFormat('yy-MM-dd')
+                            .format(widget.list![index].dueDate)),
                         Icon(Icons.alarm),
                       ],
                     ),

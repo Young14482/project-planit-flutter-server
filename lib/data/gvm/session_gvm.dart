@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
+import '../../_core/utils/api_dio.dart';
 import '../../main.dart';
+import '../repository/user_repository.dart';
 
 class SessionUser {
   int? id;
@@ -15,7 +18,7 @@ class SessionUser {
 class SessionGVM extends Notifier<SessionUser> {
   final mContext = navigatorKey.currentContext!;
 
-  // UserRepository userRepository = const UserRepository();
+  UserRepository userRepository = const UserRepository();
 
   @override
   SessionUser build() {
@@ -23,26 +26,61 @@ class SessionGVM extends Notifier<SessionUser> {
         id: null, username: null, accessToken: null, isLogin: false);
   }
 
-  Future<void> login() async {
+  Future<void> login(String username, String password) async {
+    final requestBody = {
+      "username": username,
+      "password": password,
+    };
+
+    // 구조 분해 할당으로 return
+    // final (Map<String, dynamic> responseBody, String accessToken) =
+    final (responseBody, accessToken) =
+        await userRepository.findByUsernameAndPassword(requestBody);
+
+    if (!responseBody["success"]) {
+      // 로그인 실패
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("로그인 실패 : ${responseBody["errorMessage"]}")),
+      );
+      return;
+    }
+    // 1. 토큰을 Storage 저장 -> Storage는 휴대폰 껏다 켜도 데이터 보존 -> flutter_secure_storage 라이브러리 필요
+    await secureStorage.write(
+        key: "accessToken", value: accessToken); // I/O -> 오래 걸린다.
+
+    // 2. SessionUser 갱신
+    Map<String, dynamic> data = responseBody["response"];
+    state = SessionUser(
+        id: data["id"],
+        username: data["username"],
+        accessToken: accessToken,
+        isLogin: true);
+
+    // 3. Dio 토큰 세팅, dio는 메모리에 저장이라 await 필요 없음 -> 껐다 키면 없어지는 데이터
+    dio.options.headers["Authorization"] = accessToken;
+
+    // Logger().d(accessToken);
+    // 트랜잭션 끝
     Navigator.popAndPushNamed(mContext, "/mainpage");
   }
 
-  Future<void> join(String username, String email, String password) async {
-    // final body = {
-    //   "username": username,
-    //   "email": email,
-    //   "password": password,
-    // };
-    //
-    // Map<String, dynamic> responseBody = await userRepository.save(body);
-    // if (!responseBody["success"]) {
-    //   ScaffoldMessenger.of(mContext!).showSnackBar(
-    //     SnackBar(content: Text("회원가입 실패 : ${responseBody["errorMessage"]}")),
-    //   );
-    //   return;
-    // }
-    //
-    // Navigator.pushNamed(mContext, "/login");
+  Future<void> signup(String username, String email, String password) async {
+    final body = {
+      "username": username,
+      "email": email,
+      "password": password,
+    };
+
+    Map<String, dynamic> responseBody = await userRepository.save(body);
+    Logger().d(responseBody);
+    if (!responseBody["success"]) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("회원가입 실패 : ${responseBody["errorMessage"]}")),
+      );
+      return;
+    }
+    Logger().d(responseBody);
+    Navigator.pushNamed(mContext, "/login");
   }
 
   Future<void> logout() async {
@@ -56,6 +94,79 @@ class SessionGVM extends Notifier<SessionUser> {
         Navigator.popAndPushNamed(mContext, "/login");
       },
     );
+  }
+
+  Future<void> checkDuplicateId(String username) async {
+    if (username.isEmpty) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("아이디를 입력해주세요.")),
+      );
+      return;
+    }
+
+    try {
+      final body = {"username": username};
+      Map<String, dynamic> responseBody =
+          await userRepository.checkUsername(body);
+      if (!responseBody['success']) {
+        ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("사용 가능한 아이디입니다.")),
+        );
+      } else {
+        ScaffoldMessenger.of(mContext!).showSnackBar(
+          SnackBar(content: Text("이미 사용 중인 아이디입니다.")),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("오류 발생: $e")),
+      );
+    }
+  }
+
+  Future<void> ckoutUser(String username, String email, String password,
+      String confirmPassword) async {
+    if (username.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("모든 칸을 채워주세요.")),
+      );
+      return;
+    }
+
+    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("유효한 이메일 형식이 아닙니다.")),
+      );
+      return;
+    }
+
+    if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$')
+        .hasMatch(password)) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("비밀번호는 영문 + 숫자 조합, 8~15자여야 합니다.")),
+      );
+      return;
+    }
+
+    // 비밀번호 일치 여부 확인
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("비밀번호가 일치하지 않습니다.")),
+      );
+      return;
+    }
+
+    // 회원가입 처리
+    try {
+      await signup(username.trim(), email.trim(), password.trim());
+    } catch (e) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("회원가입 실패")),
+      );
+    }
   }
 }
 

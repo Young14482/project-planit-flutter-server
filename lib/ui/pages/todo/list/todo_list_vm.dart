@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:planit/data/model/todo.dart';
-import 'package:planit/data/repository/test/mock_todo_repository.dart';
 import 'package:planit/main.dart';
 
 import '../../../../data/repository/todo_repository.dart';
@@ -61,7 +60,7 @@ final TodoListProvider = NotifierProvider<TodoListVM, TodoListModel?>(() {
 
 class TodoListVM extends Notifier<TodoListModel?> {
   final mContext = navigatorKey.currentContext;
-  TodoRepository todoRepository = MockTodoRepository();
+  TodoRepository todoRepository = TodoRepository();
 
   @override
   TodoListModel? build() {
@@ -81,7 +80,7 @@ class TodoListVM extends Notifier<TodoListModel?> {
       );
       return;
     }
+    Logger().d(responseBody["response"]);
     state = TodoListModel.fromMap(responseBody["response"]);
-    Logger().d(state.toString());
   }
 }

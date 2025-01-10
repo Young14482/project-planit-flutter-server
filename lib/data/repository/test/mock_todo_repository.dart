@@ -1,6 +1,7 @@
-import 'dart:convert';
-
+import 'package:logger/logger.dart';
 import 'package:planit/data/repository/todo_repository.dart';
+
+import '../../../_core/utils/api_dio.dart';
 
 class MockTodoRepository implements TodoRepository {
   String jsonString = '''
@@ -79,11 +80,23 @@ class MockTodoRepository implements TodoRepository {
   }
   ''';
 
+  // @override
+  // Future<Map<String, dynamic>> findAll() async {
+  //   Map<String, dynamic> body = await Future.delayed(Duration(seconds: 1), () {
+  //     return jsonDecode(jsonString) as Map<String, dynamic>;
+  //   });
+  //   return body;
+  // }
+
   @override
   Future<Map<String, dynamic>> findAll() async {
-    Map<String, dynamic> body = await Future.delayed(Duration(seconds: 1), () {
-      return jsonDecode(jsonString) as Map<String, dynamic>;
-    });
-    return body;
+    try {
+      dio.options.headers["Authorization"] = "Bearer";
+      final response = await dio.get("/api/todo-category");
+      return response.data;
+    } catch (e) {
+      Logger().e(e);
+      return {};
+    }
   }
 }

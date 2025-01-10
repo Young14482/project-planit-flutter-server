@@ -11,7 +11,6 @@ class Todo {
   DateTime createdAt;
   String repeat;
   bool isCompleted;
-  bool isDeleted;
 
   @override
   String toString() {
@@ -27,6 +26,5 @@ class Todo {
         this.createdAt =
             DateFormat("yyyy-MM-ddTHH:mm:ss").parse(map["createdAt"]),
         this.repeat = map["repeat"],
-        this.isCompleted = map["isCompleted"],
-        this.isDeleted = map["isDeleted"];
+        this.isCompleted = map["isCompleted"];
 }

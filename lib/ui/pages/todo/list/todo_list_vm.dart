@@ -61,7 +61,7 @@ class TodoListModel {
   }
 }
 
-final TodoListProvider = NotifierProvider<TodoListVM, TodoListModel?>(() {
+final todoListProvider = NotifierProvider<TodoListVM, TodoListModel?>(() {
   return TodoListVM();
 });
 

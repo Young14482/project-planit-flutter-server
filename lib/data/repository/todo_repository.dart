@@ -26,4 +26,20 @@ class TodoRepository {
 
     return body;
   }
+
+  Future<Map<String, dynamic>> update(int id, Map<String, String> data) async {
+    Response response = await dio.put("/api/todo/$id", data: data);
+
+    Map<String, dynamic> body = response.data;
+
+    return body;
+  }
+
+  Future<Map<String, dynamic>> delete(int id) async {
+    Response response = await dio.delete("/api/todo/$id");
+
+    Map<String, dynamic> body = response.data;
+
+    return body;
+  }
 }

@@ -109,4 +109,14 @@ class MockTodoRepository implements TodoRepository {
   Future<Map<String, dynamic>> newTodo() {
     throw UnimplementedError();
   }
+
+  @override
+  Future<Map<String, dynamic>> update(int id, Map<String, String> data) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> delete(int id) {
+    throw UnimplementedError();
+  }
 }

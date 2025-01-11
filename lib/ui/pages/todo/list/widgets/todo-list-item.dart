@@ -17,8 +17,8 @@ class TodoListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.push(
+      onTap: () async {
+        await Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (_) => TodoDetailPage(widget.list![index].id)));

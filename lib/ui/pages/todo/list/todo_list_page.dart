@@ -6,12 +6,12 @@ import 'package:planit/ui/pages/todo/list/widgets/todo_list_body.dart';
 class TodoListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TodoListVM vm = ref.read(TodoListProvider.notifier);
+    TodoListVM vm = ref.read(todoListProvider.notifier);
     return Scaffold(
       body: TodoListBody(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          vm.newTodo();
+        onPressed: () async {
+          await vm.newTodo();
         },
         child: const Icon(
           Icons.add,

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:planit/data/gvm/session_gvm.dart';
 
-class ChangePasswordBody extends StatelessWidget {
+class ChangePasswordBody extends ConsumerWidget {
   final TextEditingController _currentPassword = TextEditingController();
   final TextEditingController _newPassword = TextEditingController();
   final TextEditingController _confirmPassword = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionGVM sessionGVM = ref.read(sessionProvider.notifier);
+    SessionUser model = ref.watch(sessionProvider);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView(
@@ -87,7 +92,12 @@ class ChangePasswordBody extends StatelessWidget {
               SizedBox(height: 20),
               // 변경 버튼
               ElevatedButton(
-                onPressed: () {},
+                onPressed: ()  async {
+                  String currentPassword = _currentPassword.text.trim();
+                  String newPassword = _newPassword.text.trim();
+                  String confirmPassword = _confirmPassword.text.trim();
+                  await sessionGVM.passwordUpdate(currentPassword, newPassword, confirmPassword, model.id!, model.username!);
+                },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(

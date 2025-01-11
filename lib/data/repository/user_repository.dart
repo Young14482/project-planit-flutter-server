@@ -45,4 +45,10 @@ class UserRepository {
     Map<String, dynamic> body = response.data;
     return body;
   }
+
+  Future<Map<String, dynamic>> passwordUpdate(Map<String, dynamic> data, int id) async {
+    Response response = await dio.put('/api/user/$id/password', data: data);
+    Map<String, dynamic> body = response.data;
+    return body;
+  }
 }

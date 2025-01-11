@@ -5,6 +5,8 @@ import 'package:planit/ui/pages/todo/list/widgets/todo_list_category_line.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_expansion.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_point_popup.dart';
 
+import '../../complete/complete_page.dart';
+
 class TodoListBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,7 +48,13 @@ class TodoListBody extends ConsumerWidget {
             padding: const EdgeInsets.all(16.0),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, "/completed-plan");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CompletePage(list: model?.todosCompleted),
+                  ),
+                );
               },
               child: Text(
                 "완료된 모든 작업 확인",

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:planit/ui/pages/todo/complete/widgets/complete_checkbox.dart';
 import 'package:planit/ui/pages/todo/complete/widgets/complete_remove_all_dialog.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo_list_expansion.dart';
 
 class CompleteList extends StatefulWidget {
   @override
@@ -60,58 +60,9 @@ class _CompleteListState extends State<CompleteList> {
             style: TextStyle(color: Colors.blue),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Row(
-            children: <Widget>[
-              Text('2025-01-11'),
-              IconButton(
-                icon: Icon(_isExpanded ? Icons.expand_less : Icons.expand_more),
-                onPressed: _toggleExpand,
-              ),
-            ],
-          ),
-        ),
-        Visibility(
-          visible: _isExpanded,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100], // 배경색을 회색으로 설정
-                    borderRadius: BorderRadius.circular(12.0), // 모서리를 둥글게 설정
-                    // border 속성은 제거
-                  ),
-                  child: ListTile(
-                    leading: CompleteCheckbox(),
-                    title: Text(
-                      "영어 단어 10개 외우기",
-                      style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        // This adds the strikethrough
-                        color: Colors.grey,
-                        // This changes the text color to gray
-                        fontWeight: FontWeight.bold, // This keeps the text bold
-                      ),
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Text(
-                          "01-05",
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        TodoListExpansion(
+          title: "asdf",
+        )
       ],
     );
   }

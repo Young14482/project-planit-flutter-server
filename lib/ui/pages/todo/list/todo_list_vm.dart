@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:planit/data/model/category.dart';
 import 'package:planit/data/model/todo.dart';
 import 'package:planit/main.dart';
 
@@ -12,6 +13,8 @@ class TodoListModel {
   List<Todo>? todosToday;
   List<Todo>? todosFuture;
   List<Todo>? todosCompleted;
+
+  List<Category>? categories;
 
   @override
   String toString() {
@@ -50,6 +53,10 @@ class TodoListModel {
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
+
+    this.categories = (map["categories"] as List<dynamic>)
+        .map((e) => Category.fromMap(e))
+        .toList();
   }
 }
 

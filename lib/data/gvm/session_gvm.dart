@@ -83,16 +83,60 @@ class SessionGVM extends Notifier<SessionUser> {
   }
 
   Future<void> logout() async {
+    // 1. 디바이스 토큰 삭제
+    await secureStorage.delete(key: "accessToken");
+
+    // 2. 상태 갱신
+    state = SessionUser();
+
+    // 3. dio 갱신
+    dio.options.headers["Authorization"] = "";
+
+    // 4. 화면 이동
     Navigator.popAndPushNamed(mContext, "/login");
   }
 
+  // Future<void> autoLogin() async {
+  //   Future.delayed(
+  //     Duration(seconds: 1),
+  //     () {
+  //       Navigator.popAndPushNamed(mContext, "/login");
+  //     },
+  //   );
+  // }
+
   Future<void> autoLogin() async {
-    Future.delayed(
-      Duration(seconds: 1),
-      () {
-        Navigator.popAndPushNamed(mContext, "/login");
-      },
-    );
+    // 1. 디바이스에서 토큰 가져오기 (오래 걸리는 작업)
+    String? accessToken = await secureStorage.read(key: "accessToken");
+    // Logger().d(accessToken);
+
+    // 토큰 없을 경우 로그인 화면으로
+    if (accessToken == null) {
+      Navigator.popAndPushNamed(mContext, "/login");
+      return;
+    }
+
+    // 2. 로그인 통신
+    Map<String, dynamic> responseBody =
+        await userRepository.autoLogin(accessToken);
+
+    // 로그인 실패 시
+    if (!responseBody["success"]) {
+      Navigator.popAndPushNamed(mContext, "/login");
+      return;
+    }
+
+    // 3. 로그인 성공 시 SessionUser 상태 업데이트
+    Map<String, dynamic> data = responseBody["response"];
+    state = SessionUser(
+        id: data["id"],
+        username: data["username"],
+        accessToken: accessToken,
+        isLogin: true);
+
+    dio.options.headers["Authorization"] = accessToken;
+
+    Navigator.popAndPushNamed(mContext, "/mainpage");
   }
 
   Future<void> checkDuplicateId(String username) async {
@@ -123,7 +167,7 @@ class SessionGVM extends Notifier<SessionUser> {
     }
   }
 
-  Future<void> ckoutUser(String username, String email, String password,
+  Future<void> validateUser(String username, String email, String password,
       String confirmPassword) async {
     if (username.isEmpty ||
         email.isEmpty ||

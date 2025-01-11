@@ -211,6 +211,42 @@ class SessionGVM extends Notifier<SessionUser> {
       );
     }
   }
+
+  // 비밀번호 변경
+  Future<void> passwordUpdate(String currentPassword, String newPassword, String confirmPassword, int id, String username) async {
+
+
+    if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$')
+        .hasMatch(newPassword)) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("비밀번호는 영문 + 숫자 조합, 8~15자여야 합니다.")),
+      );
+      return;
+    }
+    if(newPassword != confirmPassword) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("새 비밀번호와 비밀번호 확인이 동일하지 않습니다.")),
+      );
+      return;
+    }
+    final body = {
+      "prev" : currentPassword,
+      "password": newPassword,
+    };
+
+    Map<String, dynamic> responseBody = await userRepository.passwordUpdate(body, id);
+
+    Logger().d(responseBody);
+    if(!responseBody["success"]) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text(responseBody["errorMessage"])),
+      );
+      return;
+    }
+    Navigator.popAndPushNamed(mContext, "/mainpage");
+  }
+
+
 }
 
 final sessionProvider = NotifierProvider<SessionGVM, SessionUser>(() {

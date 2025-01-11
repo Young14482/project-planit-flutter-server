@@ -10,7 +10,6 @@ import 'package:planit/ui/pages/profile/widgets/profile_work.dart';
 class ProfileBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var profileVM = ref.read(profileProvider.notifier);
     ProfileModel? model = ref.watch(profileProvider);
     SessionUser user = ref.watch(sessionProvider);
 

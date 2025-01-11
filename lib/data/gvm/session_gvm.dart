@@ -83,6 +83,16 @@ class SessionGVM extends Notifier<SessionUser> {
   }
 
   Future<void> logout() async {
+    // 1. 디바이스 토큰 삭제
+    await secureStorage.delete(key: "accessToken");
+
+    // 2. 상태 갱신
+    state = SessionUser();
+
+    // 3. dio 갱신
+    dio.options.headers["Authorization"] = "";
+
+    // 4. 화면 이동
     Navigator.popAndPushNamed(mContext, "/login");
   }
 
@@ -123,7 +133,7 @@ class SessionGVM extends Notifier<SessionUser> {
     }
   }
 
-  Future<void> ckoutUser(String username, String email, String password,
+  Future<void> validateUser(String username, String email, String password,
       String confirmPassword) async {
     if (username.isEmpty ||
         email.isEmpty ||

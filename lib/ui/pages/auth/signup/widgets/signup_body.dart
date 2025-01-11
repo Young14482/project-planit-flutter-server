@@ -102,7 +102,7 @@ class SignupBody extends ConsumerWidget {
                   final confirmPassword = _confirmPassword.text.trim();
 
                   // 프론트에서 유효성 검사
-                  gvm.ckoutUser(username, email, password, confirmPassword);
+                  gvm.validateUser(username, email, password, confirmPassword);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),

@@ -1,5 +1,4 @@
-import 'package:planit/data/repository/test/mock_todo_repository.dart';
-import 'package:planit/data/repository/todo_repository.dart';
+
 
 void main() async {
   TestRepository testRepository = TestRepository();
@@ -8,7 +7,7 @@ void main() async {
 }
 
 class TestRepository {
-  TodoRepository todoRepository = MockTodoRepository();
+  // TodoRepository todoRepository = MockTodoRepository();
 
 // Future<void> testFindAll() async {
 //   // 1. given

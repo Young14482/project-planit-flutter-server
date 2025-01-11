@@ -92,6 +92,31 @@ class TodoListVM extends Notifier<TodoListModel?> {
     state = TodoListModel.fromMap(responseBody["response"]);
   }
 
+  Future<void> update(Todo todo) async {
+    final requestBody = {
+      "title": todo.title,
+      "category": todo.category != null ? todo.category : null,
+      "memo": todo.memo,
+      "dueDate": todo.dueDate.toIso8601String(),
+      "repeat": todo.repeat,
+      "isCompleted": true
+    };
+    Map<String, dynamic> responseBody =
+        await todoRepository.update(todo.id, requestBody);
+
+    // Logger().d(responseBody);
+
+    if (!responseBody["success"]) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("게시글 수정 실패 : ${responseBody["errorMessage"]}")),
+      );
+      return;
+    }
+
+    // 통신 1번 더 하면서 리스트 갱신 + 반복 설정된 작업 추가
+    init();
+  }
+
   Future<void> newTodo() async {
     Map<String, dynamic> responseBody = await todoRepository.newTodo();
 

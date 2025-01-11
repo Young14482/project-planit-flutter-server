@@ -28,7 +28,7 @@ class TodoListModel {
 
     this.todosPrev = (map["todos"] as List<dynamic>).where((e) {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
-      return dueDate.isBefore(todayWithoutTime);
+      return dueDate.isBefore(todayWithoutTime) && e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
@@ -37,14 +37,15 @@ class TodoListModel {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
       DateTime dueDateWithoutTime =
           DateTime(dueDate.year, dueDate.month, dueDate.day);
-      return dueDateWithoutTime.compareTo(todayWithoutTime) == 0;
+      return dueDateWithoutTime.compareTo(todayWithoutTime) == 0 &&
+          e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
 
     this.todosFuture = (map["todos"] as List<dynamic>).where((e) {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
-      return dueDate.isAfter(todayWithoutTime);
+      return dueDate.isAfter(todayWithoutTime) && e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();

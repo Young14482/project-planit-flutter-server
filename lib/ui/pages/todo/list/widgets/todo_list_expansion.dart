@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:planit/data/model/todo.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo_list_checkbox.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo-list-item.dart';
 
 class TodoListExpansion extends StatefulWidget {
   final String title;
@@ -53,33 +52,9 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.list?.length,
             itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, "/detail");
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100], // 배경색을 회색으로 설정
-                      borderRadius: BorderRadius.circular(12.0), // 모서리를 둥글게 설정
-                    ),
-                    child: ListTile(
-                      leading: TodoListCheckbox(),
-                      title: Text(
-                        widget.list![index].title,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Row(
-                        children: [
-                          Text(DateFormat('yy-MM-dd')
-                              .format(widget.list![index].dueDate)),
-                          Icon(Icons.alarm),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+              return TodoListItem(
+                widget: widget,
+                index: index,
               );
             },
           ),

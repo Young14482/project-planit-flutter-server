@@ -1,14 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:planit/ui/pages/todo/detail/widgets/todo_detail_body.dart';
 
 import '../../../widgets/dialogs/custom_dialog.dart';
 
-class TodoDetailPage extends StatelessWidget {
-  TodoDetailPage({super.key});
+class TodoDetailPage extends ConsumerWidget {
+  final int todoId;
+
+  TodoDetailPage(this.todoId);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -20,7 +23,7 @@ class TodoDetailPage extends StatelessWidget {
               icon: Icon(CupertinoIcons.delete))
         ],
       ),
-      body: TodoDetailBody(),
+      body: TodoDetailBody(todoId),
     );
   }
 

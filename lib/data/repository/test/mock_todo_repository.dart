@@ -44,7 +44,7 @@ class MockTodoRepository implements TodoRepository {
         "repeat" : "매년",
         "isCompleted" : false,
         "isDeleted" : false
-      }, 
+      },
       {
         "id" : 3,
         "title" : "무현 생일",
@@ -58,7 +58,7 @@ class MockTodoRepository implements TodoRepository {
         "repeat" : "매년",
         "isCompleted" : true,
         "isDeleted" : false
-      }, 
+      },
       {
         "id" : 4,
         "title" : "무현 생일",
@@ -102,7 +102,11 @@ class MockTodoRepository implements TodoRepository {
 
   @override
   Future<Map<String, dynamic>> findById(int id) {
-    // TODO: implement findById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> newTodo() {
     throw UnimplementedError();
   }
 }

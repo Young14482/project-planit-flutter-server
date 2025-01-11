@@ -18,4 +18,12 @@ class TodoRepository {
 
     return body;
   }
+
+  Future<Map<String, dynamic>> newTodo() async {
+    Response response = await dio.post("/api/todo");
+
+    Map<String, dynamic> body = response.data;
+
+    return body;
+  }
 }

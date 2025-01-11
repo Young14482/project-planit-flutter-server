@@ -10,13 +10,19 @@ import 'package:planit/ui/widgets/dialogs/repeat_todo_dialog.dart';
 List<String> list = ['카테고리 없음', "카테고리1", "카테고리2", "카테고리3", "카테고리4", "카테고리5"];
 
 class TodoDetailBody extends StatefulWidget {
+  final int todoId;
+
+  TodoDetailBody(this.todoId);
+
   @override
-  State<TodoDetailBody> createState() => _TodoDetailBodyState();
+  State<TodoDetailBody> createState() => _TodoDetailBodyState(todoId);
 }
 
 class _TodoDetailBodyState extends State<TodoDetailBody> {
   String dropdownValue = list.first;
-  int todoId = 1;
+  final int todoId;
+
+  _TodoDetailBodyState(this.todoId);
 
   @override
   Widget build(BuildContext context) {

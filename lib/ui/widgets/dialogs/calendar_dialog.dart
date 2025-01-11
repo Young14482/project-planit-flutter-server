@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarDialog extends StatefulWidget {
+  final DateTime dueDate;
+
+  CalendarDialog(this.dueDate);
+
   @override
-  _CalendarDialogState createState() => _CalendarDialogState();
+  _CalendarDialogState createState() => _CalendarDialogState(dueDate);
 }
 
 class _CalendarDialogState extends State<CalendarDialog> {
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate;
+
+  _CalendarDialogState(this.selectedDate);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,8 @@ class _CalendarDialogState extends State<CalendarDialog> {
           headerStyle: HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,
-            titleTextFormatter: (date, locale) => '${date.year}년 ${date.month}월',
+            titleTextFormatter: (date, locale) =>
+                '${date.year}년 ${date.month}월',
           ),
           firstDay: DateTime(DateTime.now().year - 10, 1, 1),
           lastDay: DateTime(DateTime.now().year + 10, 12, 31),

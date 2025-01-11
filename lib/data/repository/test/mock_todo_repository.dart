@@ -1,7 +1,7 @@
 import 'package:logger/logger.dart';
 import 'package:planit/data/repository/todo_repository.dart';
 
-import '../../../_core/utils/api_dio.dart';
+import '../../../_core/utils/my_http.dart';
 
 class MockTodoRepository implements TodoRepository {
   String jsonString = '''
@@ -44,7 +44,7 @@ class MockTodoRepository implements TodoRepository {
         "repeat" : "매년",
         "isCompleted" : false,
         "isDeleted" : false
-      }, 
+      },
       {
         "id" : 3,
         "title" : "무현 생일",
@@ -58,7 +58,7 @@ class MockTodoRepository implements TodoRepository {
         "repeat" : "매년",
         "isCompleted" : true,
         "isDeleted" : false
-      }, 
+      },
       {
         "id" : 4,
         "title" : "무현 생일",
@@ -98,5 +98,25 @@ class MockTodoRepository implements TodoRepository {
       Logger().e(e);
       return {};
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> findById(int id) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> newTodo() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> update(int id, Map<String, String> data) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> delete(int id) {
+    throw UnimplementedError();
   }
 }

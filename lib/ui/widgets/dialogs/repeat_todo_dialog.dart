@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 
 class RepeatTodoDialog extends StatefulWidget {
+  final String repeat;
+
+  RepeatTodoDialog(this.repeat);
+
   @override
-  _RepeatTodoDialogState createState() => _RepeatTodoDialogState();
+  _RepeatTodoDialogState createState() => _RepeatTodoDialogState(repeat);
 }
 
 class _RepeatTodoDialogState extends State<RepeatTodoDialog> {
-  String selectedOption = '매일'; // 선택된 옵션을 저장하는 변수
-  bool isRepeatTask = true; // 스위치 상태를 저장하는 변수
+  String selectedOption; // 선택된 옵션을 저장하는 변수
+  bool? isRepeatTask; // 스위치 상태를 저장하는 변수
+  _RepeatTodoDialogState(this.selectedOption) {
+    isRepeatTask = selectedOption != "없음";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +34,15 @@ class _RepeatTodoDialogState extends State<RepeatTodoDialog> {
             ),
             SwitchListTile(
               title: Text('반복 작업으로 설정'),
-              value: isRepeatTask, // 스위치 상태 설정
+              value: isRepeatTask!, // 스위치 상태 설정
               onChanged: (bool value) {
                 setState(() {
                   isRepeatTask = value; // 스위치 상태 업데이트
+                  if (isRepeatTask!) {
+                    selectedOption = "매일";
+                  } else {
+                    selectedOption = "없음";
+                  }
                 });
               },
               activeColor: Colors.blue.shade600, // 스위치가 켜져 있을 때 색상 설정
@@ -39,8 +51,8 @@ class _RepeatTodoDialogState extends State<RepeatTodoDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildOptionButton('매일'), // '매일' 버튼
-                _buildOptionButton('주간'), // '주간' 버튼
-                _buildOptionButton('월간'), // '월간' 버튼
+                _buildOptionButton('매주'), // '주간' 버튼
+                _buildOptionButton('매월'), // '월간' 버튼
                 _buildOptionButton('매년'), // '매년' 버튼
               ],
             ),
@@ -56,7 +68,7 @@ class _RepeatTodoDialogState extends State<RepeatTodoDialog> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // 다이얼로그 닫기
+                    Navigator.of(context).pop(selectedOption); // 다이얼로그 닫기
                   },
                   child: Text('완료'),
                 ),
@@ -71,7 +83,7 @@ class _RepeatTodoDialogState extends State<RepeatTodoDialog> {
   // 옵션 버튼을 생성하는 함수
   Widget _buildOptionButton(String option) {
     return ElevatedButton(
-      onPressed: isRepeatTask
+      onPressed: isRepeatTask!
           ? () {
               // 스위치가 켜져 있을 때만 버튼 활성화
               setState(() {

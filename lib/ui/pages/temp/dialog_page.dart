@@ -43,7 +43,7 @@ class _DialogPageState extends State<DialogPage> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return RepeatTodoDialog();
+                return RepeatTodoDialog("");
               },
             );
           }),
@@ -85,7 +85,7 @@ class _DialogPageState extends State<DialogPage> {
     final DateTime pickedDate = await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return CalendarDialog();
+        return CalendarDialog(DateTime.now());
       },
     );
 

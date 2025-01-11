@@ -6,6 +6,7 @@ import 'package:planit/data/model/todo.dart';
 import 'package:planit/main.dart';
 
 import '../../../../data/repository/todo_repository.dart';
+import '../detail/todo_detail_page.dart';
 
 class TodoListModel {
   // 분류별 리스트
@@ -60,7 +61,7 @@ class TodoListModel {
   }
 }
 
-final TodoListProvider = NotifierProvider<TodoListVM, TodoListModel?>(() {
+final todoListProvider = NotifierProvider<TodoListVM, TodoListModel?>(() {
   return TodoListVM();
 });
 
@@ -88,5 +89,21 @@ class TodoListVM extends Notifier<TodoListModel?> {
     }
     // Logger().d(responseBody["response"]);
     state = TodoListModel.fromMap(responseBody["response"]);
+  }
+
+  Future<void> newTodo() async {
+    Map<String, dynamic> responseBody = await todoRepository.newTodo();
+
+    if (!responseBody["success"]) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("Todo 생성 실패 : ${responseBody["errorMessage"]}")),
+      );
+      return;
+    }
+
+    Navigator.push(
+        mContext!,
+        MaterialPageRoute(
+            builder: (_) => TodoDetailPage(responseBody["response"]["id"])));
   }
 }

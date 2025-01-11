@@ -20,13 +20,13 @@ class CustomDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, false);
           },
           child: const Text('취소'),
         ),
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, true);
           },
           child: Text(confirm),
         ),

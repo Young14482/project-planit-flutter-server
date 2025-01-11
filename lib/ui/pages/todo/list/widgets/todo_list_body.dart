@@ -18,7 +18,7 @@ class TodoListBody extends ConsumerWidget {
           children: [
             // 수평 스크롤 카테고리
             Expanded(
-              child: TodoListCategoryLine(),
+              child: TodoListCategoryLine(categories: model?.categories),
             ),
             // 점 3개 팝업 메뉴
             TodoListPointPopup(),

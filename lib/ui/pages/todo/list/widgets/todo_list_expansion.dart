@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planit/data/model/todo.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo-list-item.dart' as todo_itemart';
+import 'package:planit/ui/pages/todo/list/widgets/todo-list-item.dart';
 
 class TodoListExpansion extends StatefulWidget {
   final String title;
@@ -52,7 +52,7 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.list?.length,
             itemBuilder: (context, index) {
-              return todo_item.TodoListItem(
+              return TodoListItem(
                 // 여기서 todo_item.TodoListItem을 사용합니다.
                 widget: widget,
                 index: index,

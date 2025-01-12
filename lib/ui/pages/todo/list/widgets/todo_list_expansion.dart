@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planit/data/model/todo.dart';
-import 'package:planit/ui/pages/todo/list/widgets/todo-list-item.dart';
+import 'package:planit/ui/pages/todo/list/widgets/todo-list-item.dart' as todo_itemart';
 
 class TodoListExpansion extends StatefulWidget {
   final String title;
@@ -29,7 +29,7 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
     //   {"title": "프로그래밍 과제 하기", "date": "01-06"},
     //   {"title": "독서 30분 하기", "date": "01-07"},
     // ];
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -52,9 +52,11 @@ class _TodoListExpansionState extends State<TodoListExpansion> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: widget.list?.length,
             itemBuilder: (context, index) {
-              return TodoListItem(
+              return todo_item.TodoListItem(
+                // 여기서 todo_item.TodoListItem을 사용합니다.
                 widget: widget,
                 index: index,
+                todo: widget.list![index],
               );
             },
           ),

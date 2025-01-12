@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:planit/data/model/todo.dart';
 import 'package:planit/ui/pages/todo/detail/todo_detail_page.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_checkbox.dart';
 import 'package:planit/ui/pages/todo/list/widgets/todo_list_expansion.dart';
@@ -9,10 +10,12 @@ class TodoListItem extends StatelessWidget {
     super.key,
     required this.widget,
     required this.index,
+    required this.todo,
   });
 
   final TodoListExpansion widget;
   final int index;
+  final Todo todo;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class TodoListItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.0), // 모서리를 둥글게 설정
           ),
           child: ListTile(
-            leading: TodoListCheckbox(),
+            leading: TodoListCheckbox(todo: todo),
             title: Text(
               widget.list![index].title,
               style: TextStyle(fontWeight: FontWeight.bold),

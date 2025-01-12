@@ -28,7 +28,7 @@ class TodoListModel {
 
     this.todosPrev = (map["todos"] as List<dynamic>).where((e) {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
-      return dueDate.isBefore(todayWithoutTime);
+      return dueDate.isBefore(todayWithoutTime) && e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
@@ -37,14 +37,15 @@ class TodoListModel {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
       DateTime dueDateWithoutTime =
           DateTime(dueDate.year, dueDate.month, dueDate.day);
-      return dueDateWithoutTime.compareTo(todayWithoutTime) == 0;
+      return dueDateWithoutTime.compareTo(todayWithoutTime) == 0 &&
+          e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
 
     this.todosFuture = (map["todos"] as List<dynamic>).where((e) {
       DateTime dueDate = DateFormat("yyyy-MM-dd").parse(e["dueDate"]);
-      return dueDate.isAfter(todayWithoutTime);
+      return dueDate.isAfter(todayWithoutTime) && e["isCompleted"] == false;
     }).map((e) {
       return Todo.fromMap(e);
     }).toList();
@@ -89,6 +90,31 @@ class TodoListVM extends Notifier<TodoListModel?> {
     }
     // Logger().d(responseBody["response"]);
     state = TodoListModel.fromMap(responseBody["response"]);
+  }
+
+  Future<void> update(Todo todo) async {
+    final requestBody = {
+      "title": todo.title,
+      "category": todo.category != null ? todo.category : null,
+      "memo": todo.memo,
+      "dueDate": todo.dueDate.toIso8601String(),
+      "repeat": todo.repeat,
+      "isCompleted": true
+    };
+    Map<String, dynamic> responseBody =
+        await todoRepository.update(todo.id, requestBody);
+
+    // Logger().d(responseBody);
+
+    if (!responseBody["success"]) {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("게시글 수정 실패 : ${responseBody["errorMessage"]}")),
+      );
+      return;
+    }
+
+    // 통신 1번 더 하면서 리스트 갱신 + 반복 설정된 작업 추가
+    init();
   }
 
   Future<void> newTodo() async {

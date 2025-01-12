@@ -30,6 +30,10 @@ class CompleteBody extends StatelessWidget {
         ? groupBy(list!, (Todo todo) => todo.dueDate)
         : {};
 
+    // groupedTodos를 날짜 순으로 정렬
+    final sortedEntries = groupedTodos.entries.toList()
+      ..sort((a, b) => a.key.compareTo(b.key));
+
     return ListView(
       children: [
         // TODO 작업이 하나도 없을 때 보여주는 화면
@@ -67,8 +71,8 @@ class CompleteBody extends StatelessWidget {
             //   title: "asdf",
             //   list: list,
             // ),
-            // groupedTodos Map을 반복하여 각 날짜에 대해 CompleteListExpansion 생성
-            ...groupedTodos.entries.map((entry) {
+            // sortedEntries를 반복하여 각 날짜에 대해 CompleteListExpansion 생성
+            ...sortedEntries.map((entry) {
               return CompleteListExpansion(
                 title: DateFormat("yyyy-MM-dd").format(entry.key),
                 list: entry.value,
@@ -78,6 +82,5 @@ class CompleteBody extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

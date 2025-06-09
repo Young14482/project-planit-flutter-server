@@ -28,7 +28,6 @@ https://github.com/user-attachments/assets/35872f1d-e268-4469-bb6b-64221fa1d643
 ### 2. 주요 기능([이동](#2-주요-기능))
 ### 3. 백엔드 서버 깃허브([이동](https://github.com/Young14482/project-planit-api-server))
 ### 4. 담당 업무, 트러블 슈팅, 개인 소감
-- #### fork하고 각자 알아서
 ---
 ## 1. 프로젝트 설계
 - ### 사이트맵
@@ -74,4 +73,23 @@ https://github.com/user-attachments/assets/35872f1d-e268-4469-bb6b-64221fa1d643
 - 새 카테고리 생성
   
 ![image](https://github.com/user-attachments/assets/d399b139-6e39-43d1-aa44-f15f2e083477)
-  
+
+## 4. 담당 업무, 트러블 슈팅, 개인 소감
+### 담당 업무
+- 화면 설계
+  ![화면설계 깃허브용2](https://github.com/user-attachments/assets/3c4869e2-7966-4992-a22e-8cd065449b1d)
+- ERP 설계
+- 백엔드 서버 구축
+  - 깃허브 링크: [https://github.com/Young14482/project-planit-api-server](https://github.com/Young14482/project-planit-api-server)
+
+### 트러블 슈팅
+- #### 프론트 담당 팀원과 소통
+	- 회원가입시 해당 정보가 DB에 저장되지 않는다는 프론트 담당 팀원의 문의가 들어옴.
+	- 같이 작업하는 백엔드 서버 담당 팀원과 서버 검토 후 문제 없음.
+	- 이후 api문서대로 하였는가에 대한 질문에 확인해 보겠다는 대답을 받음.
+	- api호출 주소가 잘못된 것을 확인.
+  - 프론트와의 협력 시 api문서의 중요성과 컨벤션에 대한 중요성등 소통의 중요성을 다시 한번 깨달음
+
+### 개인 소감
+- 당연히 서버측에서 구현해야하는 기능이라 생각해서 넣은 기능들이 프론트 담당 팀원들을 편하게 만들었을 때 기분이 좋았습니다.
+백엔드가 고생할수록 프론트가 편해진다는 말을 들은적이 있었는데 이를 실감할 수 있었습니다.
